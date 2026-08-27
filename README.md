@@ -6,6 +6,8 @@ Arabic RTL ERP trial for industrial, electromechanical, MEP, installation, maint
 
 Phase 1 provides local company setup, fiscal periods, basic masters, company isolation, setup progress, and backup/restore. It starts empty and never seeds commercial values. Accounting and operational transaction modules are intentionally pending; see `PROJECT_STATUS.md`.
 
+The public root route (`/`) is a premium Arabic marketing page explaining the integrated project, accounting, procurement, inventory, certificate, profitability, and management workflows. The existing ERP entry remains at `/setup`. Marketing mockup figures are presentational only and never create IndexedDB records. The primary CTA shows «جرّب النظام الآن» for a new browser and «فتح النظام» when a local company already exists.
+
 ## Architecture and Data
 
 The UI calls application services and repository interfaces. Current repositories persist to IndexedDB through Dexie. There is no backend, cloud database, paid API, or required environment variable. Data remains on the same browser/device and can disappear if browser storage is cleared.

@@ -2,10 +2,38 @@
 
 :root { --background: #f4f7fa; --foreground: #0f172a; }
 * { box-sizing: border-box; }
-html { background: var(--background); }
+html { background: var(--background); scroll-behavior: smooth; }
 body { margin: 0; background: var(--background); color: var(--foreground); font-family: Tahoma, Arial, sans-serif; }
 button, input, select, textarea { font: inherit; }
 .field-label { display: grid; gap: 0.55rem; color: #334155; font-size: 0.8125rem; font-weight: 700; }
 .field-input { width: 100%; min-height: 46px; border: 1px solid #d9e1ea; border-radius: 0.75rem; background: #fbfdff; padding: 0.72rem 0.9rem; color: #0f172a; outline: none; transition: border-color 150ms, box-shadow 150ms, background 150ms; }
 .field-input:focus { border-color: #1c8a91; background: white; box-shadow: 0 0 0 3px rgb(28 138 145 / 12%); }
 .field-input::placeholder { color: #9aa9ba; }
+
+.landing-grid {
+  background-image:
+    linear-gradient(rgb(12 49 86 / 3%) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(12 49 86 / 3%) 1px, transparent 1px);
+  background-size: 42px 42px;
+}
+
+.section-title {
+  color: #0c3156;
+  font-size: clamp(1.9rem, 4vw, 2.75rem);
+  font-weight: 900;
+  line-height: 1.25;
+  letter-spacing: -0.025em;
+}
+
+.section-title span { display: block; color: #16836f; }
+.section-copy { margin-top: 1rem; color: #5f6f82; font-size: 0.95rem; line-height: 2; }
+
+a:focus-visible, button:focus-visible, summary:focus-visible, input:focus-visible, select:focus-visible {
+  outline: 3px solid rgb(34 165 139 / 30%);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+}

@@ -13,10 +13,12 @@ No backend, API persistence, cloud database, paid service, or persistence enviro
 # Implemented Modules
 
 - Arabic RTL first-run wizard with draft recovery.
+- Premium Arabic RTL commercial landing page at `/`, with responsive navigation, workflow/accounting/project sections, marketing-only product mockups, FAQ, and SEO/Open Graph metadata.
 - Multiple isolated companies and company switcher.
 - Company, branch, fiscal year, generated accounting periods, optional tax, treasury, warehouse, and first-project foundation.
 - Setup progress and honest zero-data dashboard.
 - Versioned local backup/restore and audit event foundation.
+- Existing ERP/setup flow preserved at `/setup`; landing CTAs open that route and detect existing local companies without mutating data.
 
 # Pending Modules
 
@@ -76,6 +78,7 @@ Repository audit, architecture package, application scaffold, Phase 1 data/domai
 - Logo upload is not included in Phase 1.
 - The scaffold dependency tree reports upstream audit advisories; no force upgrade was applied because it could break framework compatibility.
 - No blocking deployment issue is currently known. Production styling was verified after adding the required Tailwind PostCSS configuration.
+- Marketing visuals contain illustrative values only; they are isolated from ERP persistence and clearly labeled as presentational.
 
 # Pending Work
 
@@ -91,7 +94,7 @@ Official repository: https://github.com/AhmedMohamed500/Industrial-Contracting-P
 
 # Vercel Deployment
 
-Live frontend: https://industrial-contracting-project.vercel.app. Production deploys from `main`; no Vercel database, storage, or backend feature is enabled or allowed.
+Live frontend: https://industrial-contracting-project.vercel.app. `/` is the marketing homepage and `/setup` is the local ERP entry. Production deploys from `main`; no Vercel database, storage, or backend feature is enabled or allowed.
 
 # Future Backend Migration
 
