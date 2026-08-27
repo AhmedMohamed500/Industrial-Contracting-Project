@@ -75,7 +75,7 @@ Repository audit, architecture package, application scaffold, Phase 1 data/domai
 - Browser data can be cleared and is device-specific; backups are the user’s responsibility.
 - Logo upload is not included in Phase 1.
 - The scaffold dependency tree reports upstream audit advisories; no force upgrade was applied because it could break framework compatibility.
-- Vercel connection cannot be represented in source alone and must be verified against the account/project after push.
+- No blocking deployment issue is currently known. Production styling was verified after adding the required Tailwind PostCSS configuration.
 
 # Pending Work
 
@@ -91,7 +91,7 @@ Official repository: https://github.com/AhmedMohamed500/Industrial-Contracting-P
 
 # Vercel Deployment
 
-Target is a frontend-only deployment from `main`. No Vercel database, storage, or backend feature is allowed.
+Live frontend: https://industrial-contracting-project.vercel.app. Production deploys from `main`; no Vercel database, storage, or backend feature is enabled or allowed.
 
 # Future Backend Migration
 

@@ -36,7 +36,7 @@ Financial statements will be generated from posted balanced journals only. Accou
 
 ## Deployment
 
-Official source: https://github.com/AhmedMohamed500/Industrial-Contracting-Project.git. Production is intended to deploy from `main` to Vercel as a frontend web app. Do not add Vercel storage, databases, server persistence, or backend environment variables.
+Official source: https://github.com/AhmedMohamed500/Industrial-Contracting-Project.git. Production deploys automatically from `main` to https://industrial-contracting-project.vercel.app as a frontend web app. Do not add Vercel storage, databases, server persistence, or backend environment variables.
 
 ## Documentation
 
