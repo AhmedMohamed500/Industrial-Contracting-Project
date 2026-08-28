@@ -23,6 +23,11 @@ const groups = [
     ['طلبات الشراء PR','/erp/purchase-requisitions',ClipboardList], ['طلبات عروض الأسعار RFQ','/erp/rfqs',FileSpreadsheet],
     ['مقارنة عروض الموردين','/erp/supplier-quotes',Calculator], ['أوامر الشراء PO','/erp/purchase-orders',ShoppingCart],
   ]},
+  { title: 'المخزون والتسليم', items: [
+    ['الأصناف','/erp/items',Tags], ['استلامات الموردين','/erp/goods-receipts',ArchiveRestore],
+    ['سجل المخزون','/erp/stock-ledger',BookOpen], ['تسليمات العميل','/erp/client-deliveries',Truck],
+    ['الفحص والقبول','/erp/delivery-inspections',FileCheck2], ['مرتجعات المورد','/erp/purchase-returns',ArchiveRestore],
+  ]},
   { title: 'المالية', items: [
     ['دليل الحسابات','/erp/accounts',ListTree], ['الربط المحاسبي','/erp/mapping',FileCheck2],
     ['الأرصدة الافتتاحية','/erp/opening-balances',Calculator], ['القيود اليومية','/erp/journals',FileText],

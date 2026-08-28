@@ -13,7 +13,7 @@
 - إعداد الشركة والسنة والفترات الشهرية والتعريفات الأساسية الاختيارية.
 - شركات متعددة مع عزل `companyId` وتبديل الشركة وإضافة الفروع.
 - حفظ مسودة الإعداد ونسخة JSON احتياطية واستعادة متوافقة مع الإصدار.
-- IndexedDB/Dexie schema v4 مع ترقيات additive تحافظ على جداول وبيانات v1/v2.
+- IndexedDB/Dexie schema v5 مع ترقيات additive تحافظ على جداول وبيانات v1/v2.
 - حالات صفرية صادقة؛ لا توجد معاملات أو أرصدة أو مشروعات تجريبية مصطنعة.
 
 ## Theme & Navigation — Implemented
@@ -48,10 +48,10 @@ Industrial Contracting, Supply Only, Supply & Installation, Maintenance, Service
 
 يعمل PR بحالات draft → submitted → approved، ثم RFQ لموردين مسجلين، وعروض أسعار ومقارنة، واختيار ذري متكرر بأمان ينشئ PO، ثم اعتماد PO. الاستلام/التسليم وفاتورة المورد والدفع لم تُنفذ بعد.
 
-## Inventory — Partial / Planned
+## Inventory — Implemented Core
 
-- **Partial:** warehouse master فقط.
-- **Planned:** items، reservations، receipts، stock ledger، valuation، transfers، issues، returns، adjustments، direct site receiving.
+- **Implemented:** item master، استلامات مرتبطة بـPO معتمد، ترحيل للمخزن، stock ledger ورصيد مشتق، تسليم العميل، direct delivery بلا حركات مخزن وهمية، فحص وقبول ومرتجعات مورد.
+- **Planned:** weighted-average valuation، reservations، transfers، adjustments، serial/batch والتكامل المحاسبي.
 
 ## Client, Supplier & Subcontractors — Implemented Masters / Planned Transactions
 
@@ -68,11 +68,11 @@ Industrial Contracting, Supply Only, Supply & Installation, Maintenance, Service
 
 ## Local Data Model — Implemented
 
-Dexie schema version 4 يحتفظ بجداول v1–v3 ويضيف supplyPlans وmaterialRequirements وpurchaseRequisitions وrfqs وsupplierQuotes وpurchaseOrders. الترقية additive، وBackup v4 يشملها ويقبل الإصدارات الأقدم.
+Dexie schema version 5 يحتفظ بجداول v1–v4 ويضيف inventoryItems وgoodsReceipts وstockMovements وclientDeliveries وdeliveryInspections وpurchaseReturns. Backup v5 يشملها ويقبل الإصدارات الأقدم.
 
 ## Quality Coverage
 
-الاختبارات تغطي الأساس والمحاسبة والتجاري، وانتقالات PR، وضوابط RFQ والعروض، وإنشاء PO الذري والمتكرر بأمان.
+الاختبارات تغطي الأساس والمحاسبة والتجاري والمشتريات، والترحيل المخزني، منع تجاوز الكميات، التسليم المباشر بلا حركة وهمية، والفحص والمرتجعات.
 
 ## Known Limitations
 

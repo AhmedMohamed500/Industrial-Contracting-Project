@@ -2,7 +2,7 @@
 
 ## الحالة
 
-**Partial:** warehouse master. **Planned:** items and every stock transaction.
+**Implemented core:** item master, receipt from approved PO, posted stock movement, stock ledger/on-hand, client delivery, direct delivery without fake stock movement, inspection, and supplier return. Reservations, transfers, adjustments, advanced valuation, and accounting posting remain planned.
 
 Purchase receipt increases controlled stock when goods physically enter a company warehouse. Transfer changes location only and is not consumption. Material issue creates project material consumption/cost; return reverses against its source. Count and adjustment require reason, approval, valuation, and audit.
 

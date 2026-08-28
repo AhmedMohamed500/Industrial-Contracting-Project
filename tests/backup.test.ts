@@ -4,7 +4,7 @@ import { SCHEMA_VERSION } from '../src/domain/foundation';
 
 describe('backup compatibility', () => {
   it('accepts the current versioned envelope', () => {
-    expect(() => assertCompatibleBackup({ schemaVersion: SCHEMA_VERSION, appVersion: '0.4.0', createdAt: new Date().toISOString(), data: {} })).not.toThrow();
+    expect(() => assertCompatibleBackup({ schemaVersion: SCHEMA_VERSION, appVersion: '0.5.0', createdAt: new Date().toISOString(), data: {} })).not.toThrow();
   });
 
   it('accepts a legacy v1 backup for additive migration', () => {

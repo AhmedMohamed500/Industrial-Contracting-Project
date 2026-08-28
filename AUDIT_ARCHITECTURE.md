@@ -170,3 +170,7 @@ Schema v3 adds company-scoped parties, contracts, BOQ items, project budget line
 ## 24. Supply Planning and Procurement Core
 
 Schema v4 adds supply plans, material requirements, purchase requisitions, RFQs, supplier quotes, and purchase orders. PR state transitions are explicit; RFQ requires an approved PR and valid invited suppliers. Quote selection closes the RFQ, marks one quote selected, and creates one idempotent PO in a single transaction. PO approval represents committed cost only. Dispatch, receipt, inventory, inspection, supplier invoicing, payment, and accounting posting are not inferred from PO approval.
+
+## 25. Receiving, Inventory, and Direct Delivery Core
+
+Schema v5 adds item masters, goods receipts, immutable stock movements, client deliveries, delivery inspections, and purchase returns. Warehouse receipts and deliveries create traceable movements only when goods physically enter company control. Direct-to-client receipts and deliveries intentionally create no warehouse movement. Quantity caps prevent receipt above PO, delivery above receipt, inspection above delivery, and return above receipt or available warehouse stock.
