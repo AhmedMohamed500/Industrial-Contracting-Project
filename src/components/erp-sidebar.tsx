@@ -26,6 +26,7 @@ const groups = [
   { title: 'المخزون والتسليم', items: [
     ['الأصناف','/erp/items',Tags], ['الوحدات','/erp/units',Calculator], ['استلامات الموردين','/erp/goods-receipts',ArchiveRestore],
     ['سجل المخزون','/erp/stock-ledger',BookOpen], ['تسليمات العميل','/erp/client-deliveries',Truck],
+    ['تقييم المخزون','/erp/inventory-valuation',Calculator], ['مطابقة المخزون مع GL','/erp/inventory-reconciliation',FileCheck2],
     ['طلبات خامات المواقع','/erp/site-requests',ClipboardList], ['حجز الخامات','/erp/reservations',Boxes],
     ['تحويلات المخازن','/erp/warehouse-transfers',Truck], ['صرف للمشروعات','/erp/material-issues',ArchiveRestore],
     ['التسويات','/erp/stock-adjustments',Calculator], ['الجرد','/erp/stock-counts',FileSpreadsheet], ['الهالك','/erp/waste',X],
@@ -48,13 +49,16 @@ const groups = [
     ['الشيكات','/erp/cheques',FileText], ['العهد والنثريات','/erp/petty-cash',Calculator], ['التسوية البنكية','/erp/bank-reconciliation',FileCheck2],
   ]},
   { title: 'التقارير والإقفال', items: [
+    ['مركز التقارير','/erp/report-center',BarChart3], ['أرباح وخسائر المشروعات','/erp/project-pnl',TrendingUp], ['التدفقات النقدية','/erp/cash-flow',Landmark],
     ['أداء وربحية المشروعات','/erp/project-performance',TrendingUp], ['التوقع النقدي','/erp/cash-forecast',BarChart3],
     ['أداء الموردين','/erp/supplier-performance',Users], ['إقفال الفترات','/erp/period-close',ArchiveRestore],
     ['إقفال المشروعات','/erp/project-closeout',CheckCircle2],
+    ['مساعدة النظام','/erp/help',BookOpen],
   ]},
   { title: 'المالية', items: [
     ['دليل الحسابات','/erp/accounts',ListTree], ['الربط المحاسبي','/erp/mapping',FileCheck2],
     ['الأرصدة الافتتاحية','/erp/opening-balances',Calculator], ['القيود اليومية','/erp/journals',FileText],
+    ['التسويات المحاسبية','/erp/adjustments',Calculator],
     ['اليومية العامة','/erp/general-journal',FileSpreadsheet], ['الأستاذ العام','/erp/ledger',BookOpen],
     ['ميزان المراجعة','/erp/trial-balance',Landmark], ['القوائم المالية','/erp/financial-statements',ArchiveRestore],
   ]},

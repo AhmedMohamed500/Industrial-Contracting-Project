@@ -10,18 +10,20 @@ import { SupplyControlApp, type SupplyControlModule } from '../../../src/compone
 import { ExecutionApp, type ExecutionModule } from '../../../src/components/execution/execution-app';
 import { ResourcesApp, type ResourcesModule } from '../../../src/components/resources/resources-app';
 import { BankingApp, type BankingModule } from '../../../src/components/banking/banking-app';
+import { InventoryReportsApp, type InventoryReportModule } from '../../../src/components/inventory/inventory-reports-app';
 
-const modules: AccountingModule[] = ['accounts','mapping','opening-balances','journals','general-journal','ledger','trial-balance','financial-statements'];
+const modules: AccountingModule[] = ['accounts','mapping','opening-balances','journals','adjustments','general-journal','ledger','trial-balance','financial-statements'];
 const commercialModules: CommercialModule[] = ['clients','suppliers','subcontractors','projects','contracts','boq','budgets','cost-centers','cost-codes','tenders','variations'];
 const procurementModules: ProcurementModule[] = ['supply-plans','material-requirements','purchase-requisitions','rfqs','supplier-quotes','purchase-orders'];
 const inventoryModules: InventoryModule[] = ['items','goods-receipts','stock-ledger','client-deliveries','delivery-inspections','purchase-returns'];
 const financeModules: FinanceModule[] = ['client-invoices','supplier-invoices','subcontract-certificates','treasury'];
-const reportingModules: ReportingModule[] = ['project-performance','cash-forecast','supplier-performance','period-close','project-closeout'];
+const reportingModules: ReportingModule[] = ['project-performance','project-pnl','cash-flow','report-center','help','cash-forecast','supplier-performance','period-close','project-closeout'];
 const inventoryOperationsModules: InventoryOperationsModule[] = ['units','site-requests','reservations','warehouse-transfers','material-issues','stock-adjustments','stock-counts','waste'];
 const supplyControlModules: SupplyControlModule[] = ['supply-control','supply-lots','quantity-tracking','three-way-match','service-orders','commercial-notes'];
 const executionModules: ExecutionModule[] = ['subcontracts','client-ipc','materials-on-site','handovers','retention-releases'];
 const resourcesModules: ResourcesModule[] = ['expenses','timesheets','equipment','fixed-assets','depreciation','bank-guarantees'];
 const bankingModules: BankingModule[] = ['bank-accounts','bank-transfers','cheques','petty-cash','bank-reconciliation'];
+const inventoryReportModules: InventoryReportModule[] = ['inventory-valuation','inventory-reconciliation'];
 
 export default async function AccountingModulePage({params}:{params:Promise<{module:string}>}) {
   const { module } = await params;
@@ -36,5 +38,6 @@ export default async function AccountingModulePage({params}:{params:Promise<{mod
   if (executionModules.includes(module as ExecutionModule)) return <ExecutionApp module={module as ExecutionModule}/>;
   if (resourcesModules.includes(module as ResourcesModule)) return <ResourcesApp module={module as ResourcesModule}/>;
   if (bankingModules.includes(module as BankingModule)) return <BankingApp module={module as BankingModule}/>;
+  if (inventoryReportModules.includes(module as InventoryReportModule)) return <InventoryReportsApp module={module as InventoryReportModule}/>;
   notFound();
 }

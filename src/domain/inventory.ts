@@ -7,6 +7,8 @@ export interface StockMovement extends BaseEntity { itemId:string; warehouseId:s
 export interface ClientDelivery extends BaseEntity { number:string; receiptId:string; projectId:string; itemId:string; warehouseId?:string; scenario:DeliveryScenario; quantity:number; deliveredAt:string; status:'draft'|'posted'|'cancelled' }
 export interface DeliveryInspection extends BaseEntity { number:string; deliveryId:string; inspectedAt:string; acceptedQuantity:number; rejectedQuantity:number; result:'accepted'|'accepted_with_notes'|'rejected'; notes?:string; status:'draft'|'approved' }
 export interface PurchaseReturnRecord extends BaseEntity { number:string; receiptId:string; itemId:string; warehouseId?:string; quantity:number; reason:string; returnedAt:string; status:'draft'|'posted'|'cancelled' }
+export interface InventoryValuationRow { itemId:string;warehouseId:string;quantity:number;value:number;weightedAverageCost:number }
+export interface InventoryReconciliationResult { stockValue:number;generalLedgerValue:number;difference:number;balanced:boolean }
 
 export interface InventoryRepository {
   listItems(companyId:string):Promise<InventoryItem[]>; saveItem(input:Omit<InventoryItem,keyof BaseEntity>&{id?:string;companyId:string}):Promise<InventoryItem>;
@@ -15,4 +17,5 @@ export interface InventoryRepository {
   listDeliveries(companyId:string):Promise<ClientDelivery[]>; saveDelivery(input:Omit<ClientDelivery,keyof BaseEntity>&{id?:string;companyId:string}):Promise<ClientDelivery>; postDelivery(id:string):Promise<void>;
   listInspections(companyId:string):Promise<DeliveryInspection[]>; saveInspection(input:Omit<DeliveryInspection,keyof BaseEntity>&{id?:string;companyId:string}):Promise<DeliveryInspection>;
   listReturns(companyId:string):Promise<PurchaseReturnRecord[]>; saveReturn(input:Omit<PurchaseReturnRecord,keyof BaseEntity>&{id?:string;companyId:string}):Promise<PurchaseReturnRecord>; postReturn(id:string):Promise<void>;
+  getValuation(companyId:string):Promise<InventoryValuationRow[]>; getInventoryReconciliation(companyId:string):Promise<InventoryReconciliationResult>;
 }
