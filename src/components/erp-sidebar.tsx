@@ -2,7 +2,8 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { ArchiveRestore, BarChart3, BookOpen, Boxes, Building2, Calculator, CheckCircle2, ClipboardList, FileCheck2, FileSpreadsheet, FileText, Handshake, Landmark, ListTree, Settings, ShieldCheck, ShoppingCart, Tags, TrendingUp, Truck, Users, X } from 'lucide-react';
+import { useState } from 'react';
+import { ArchiveRestore, BarChart3, BookOpen, Boxes, Building2, Calculator, CheckCircle2, ChevronDown, ClipboardList, FileCheck2, FileSpreadsheet, FileText, Handshake, Landmark, ListTree, Settings, ShieldCheck, ShoppingCart, Tags, TrendingUp, Truck, Users, X } from 'lucide-react';
 
 const groups = [
   { title: 'الإدارة', items: [
@@ -69,9 +70,21 @@ const groups = [
 
 export function ErpSidebar({open,onClose}:{open:boolean;onClose:()=>void}) {
   const pathname = usePathname();
-  return <aside className={`${open?'fixed inset-y-0 right-0 z-50 flex':'hidden'} w-[282px] shrink-0 flex-col overflow-y-auto bg-[#17324D] p-5 text-white lg:flex`}>
-    <div className="mb-7 flex items-center justify-between"><Link href="/setup" className="flex items-center gap-3"><span className="grid h-10 w-10 place-items-center rounded-xl bg-[#35A89A] font-black">م</span><div><p className="font-extrabold">منظومة المقاولات</p><p className="text-[10px] text-slate-300">LOCAL TRIAL EDITION</p></div></Link><button type="button" className="lg:hidden" onClick={onClose} aria-label="إغلاق القائمة"><X/></button></div>
-    <nav className="space-y-6">{groups.map(group=><div key={group.title}><p className="mb-2 px-3 text-[10px] font-extrabold text-[#72D6C8]">{group.title}</p><div className="space-y-1">{group.items.map(([label,href,Icon])=>{const active=href==='/setup'?pathname==='/setup':pathname===href;return <Link onClick={onClose} key={href} href={href} className={`flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm transition ${active?'bg-[#244560] font-bold text-white':'text-slate-200 hover:bg-[#244560]/70'}`}><Icon size={17}/><span>{label}</span></Link>})}</div></div>)}</nav>
-    <div className="mt-auto rounded-xl border border-white/10 bg-[#244560]/70 p-4"><div className="flex items-center gap-2 text-xs font-bold"><ShieldCheck size={16} className="text-[#72D6C8]"/>بيانات محلية فقط</div><p className="mt-2 text-[11px] leading-5 text-slate-300">كل القيود والبيانات محفوظة في IndexedDB على هذا الجهاز.</p></div>
+  const activeGroup = groups.find(group => group.items.some(([,href]) => href === '/setup' ? pathname === '/setup' : pathname === href));
+  const [openGroup,setOpenGroup] = useState<string | null>(() => activeGroup?.title ?? groups[0].title);
+
+  return <aside className={`${open?'fixed inset-y-0 right-0 z-50 flex shadow-2xl':'hidden'} w-[292px] shrink-0 flex-col overflow-y-auto border-l border-slate-200 bg-[#F8FAFC] p-4 text-slate-800 lg:flex lg:shadow-none`}>
+    <div className="mb-5 flex items-center justify-between border-b border-slate-200 pb-4"><Link href="/setup" className="flex items-center gap-3"><span className="grid h-10 w-10 place-items-center rounded-xl bg-[#2F8F83] font-black text-white shadow-sm">م</span><div><p className="font-extrabold text-slate-900">منظومة المقاولات</p><p className="text-[10px] font-medium tracking-wide text-slate-500">LOCAL TRIAL EDITION</p></div></Link><button type="button" className="rounded-lg p-1.5 text-slate-500 hover:bg-slate-200 lg:hidden" onClick={onClose} aria-label="إغلاق القائمة"><X size={20}/></button></div>
+    <nav className="space-y-2">{groups.map(group=>{
+      const expanded = openGroup === group.title;
+      const containsActiveItem = activeGroup?.title === group.title;
+      const sectionId = `sidebar-${group.title.replace(/\s+/g,'-')}`;
+      return <section key={group.title} className={`overflow-hidden rounded-2xl border transition ${containsActiveItem?'border-[#A8D9D2] bg-white shadow-sm':'border-slate-200 bg-white/80'}`}>
+        <button type="button" aria-expanded={expanded} aria-controls={sectionId} onClick={()=>setOpenGroup(expanded?null:group.title)} className={`flex w-full items-center justify-between gap-3 px-4 py-3 text-right text-sm font-extrabold transition hover:bg-slate-50 ${containsActiveItem?'text-[#20766D]':'text-slate-700'}`}>
+          <span>{group.title}</span><ChevronDown size={17} className={`shrink-0 text-slate-400 transition-transform duration-200 ${expanded?'rotate-180':''}`}/>
+        </button>
+        <div id={sectionId} className={`grid transition-[grid-template-rows,opacity] duration-200 ${expanded?'grid-rows-[1fr] opacity-100':'grid-rows-[0fr] opacity-0'}`}><div className="overflow-hidden"><div className="space-y-1 border-t border-slate-100 px-2 py-2">{group.items.map(([label,href,Icon])=>{const active=href==='/setup'?pathname==='/setup':pathname===href;return <Link onClick={()=>{setOpenGroup(group.title);onClose()}} key={href} href={href} className={`flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm transition ${active?'bg-[#E4F3F0] font-bold text-[#176B63]':'text-slate-600 hover:bg-slate-100 hover:text-slate-900'}`}><Icon size={17} className={active?'text-[#2F8F83]':'text-slate-400'}/><span>{label}</span></Link>})}</div></div></div>
+      </section>})}</nav>
+    <div className="mt-5 rounded-2xl border border-[#CDE7E3] bg-[#EDF7F5] p-4 text-slate-700"><div className="flex items-center gap-2 text-xs font-bold"><ShieldCheck size={16} className="text-[#2F8F83]"/>بيانات محلية فقط</div><p className="mt-2 text-[11px] leading-5 text-slate-500">كل القيود والبيانات محفوظة في IndexedDB على هذا الجهاز.</p></div>
   </aside>;
 }
