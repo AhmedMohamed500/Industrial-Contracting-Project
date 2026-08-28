@@ -14,6 +14,8 @@ const groups = [
     ['المناقصات والتسعير','/erp/tenders',FileSpreadsheet], ['BOQ','/erp/boq',ListTree],
     ['الميزانيات','/erp/budgets',Calculator], ['مراكز التكلفة','/erp/cost-centers',Boxes],
     ['أكواد التكلفة','/erp/cost-codes',Tags], ['التغييرات والمطالبات','/erp/variations',TrendingUp],
+    ['WBS','/erp/wbs',ListTree], ['متابعة المشروع','/erp/project-control',BarChart3], ['Earned Value','/erp/earned-value',TrendingUp],
+    ['التجهيز والسحب','/erp/mobilization',Truck], ['توزيع الأعباء','/erp/overhead-allocation',Calculator], ['تحميلات بين المشروعات','/erp/inter-project',FileSpreadsheet],
   ]},
   { title: 'الأطراف', items: [
     ['العملاء','/erp/clients',Users], ['الموردون','/erp/suppliers',Users], ['مقاولو الباطن','/erp/subcontractors',Users],
@@ -36,6 +38,7 @@ const groups = [
     ['عقود مقاولي الباطن','/erp/subcontracts',Handshake], ['مستخلصات العملاء IPC','/erp/client-ipc',FileCheck2],
     ['Materials on Site','/erp/materials-on-site',Boxes], ['التسليم الجزئي والنهائي','/erp/handovers',CheckCircle2],
     ['إطلاق الاحتجاز','/erp/retention-releases',Landmark],
+    ['فترة ضمان العيوب DLP','/erp/defects-liability',ShieldCheck],
   ]},
   { title: 'الموارد والأصول', items: [
     ['المصروفات','/erp/expenses',FileText], ['العمالة وكشوف الوقت','/erp/timesheets',Users],

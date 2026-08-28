@@ -13,7 +13,7 @@
 - إعداد الشركة والسنة والفترات الشهرية والتعريفات الأساسية الاختيارية.
 - شركات متعددة مع عزل `companyId` وتبديل الشركة وإضافة الفروع.
 - حفظ مسودة الإعداد ونسخة JSON احتياطية واستعادة متوافقة مع الإصدار.
-- IndexedDB/Dexie schema v12 مع ترقيات additive تحافظ على كل الإصدارات السابقة.
+- IndexedDB/Dexie schema v13 مع ترقيات additive تحافظ على كل الإصدارات السابقة.
 - حالات صفرية صادقة؛ لا توجد معاملات أو أرصدة أو مشروعات تجريبية مصطنعة.
 
 ## Theme & Navigation — Implemented
@@ -38,12 +38,12 @@ Industrial Contracting, Supply Only, Supply & Installation, Maintenance, Service
 - **Implemented:** اليومية العامة، الأستاذ الجاري، وميزان مراجعة مشتق من القيود المرحلة.
 - **Implemented:** Income Statement، Balance Sheet، Cash Flow، Project P&L، ومركز تسويات بقيود adjustment قابلة للعكس.
 
-## Project & Contract Cycle — Implemented Core / Partial Operations
+## Project & Contract Cycle — Implemented Operations
 
 - **Implemented:** CRUD للعملاء والموردين ومقاولي الباطن والمشروعات والعقود، مع تحقق الأكواد وربط الشركة والعميل والمشروع.
 - **Implemented:** مناقصات وتحويل ذري ومتكرر بأمان للمناقصة الفائزة إلى مشروع وعقد؛ BOQ وموازنات ومراكز/أكواد تكلفة وتغييرات تعيد حساب العقد عند الاعتماد.
 - **Implemented:** عقود مقاولي الباطن، Materials on Site، IPC بخطوط BOQ تراكمية، التسليم الجزئي/النهائي، وإطلاق الاحتجاز.
-- **Planned:** WBS، mobilization/demobilization، overhead، inter-project/intercompany، DLP التفصيلي.
+- **Implemented:** WBS الهرمي، قياسات التقدم، Earned Value (PV/EV/AC/SPI/CPI/EAC)، mobilization/demobilization، overhead وinter-project posting، وDLP defects المانعة للإقفال.
 
 ## Procurement — Implemented Core / Planned Fulfillment
 
@@ -65,7 +65,7 @@ Industrial Contracting, Supply Only, Supply & Installation, Maintenance, Service
 - **Implemented:** سندات قبض وصرف مخصصة لفواتير العميل والمورد ومستخلصات المقاول، منع تجاوز المستحق، تحديث part-paid/paid، وترحيل GL للبنك/النقدية وAR/AP.
 - **Implemented:** cash forecast، handovers، retention release، final account gates، project close.
 - **Implemented:** الحسابات البنكية والصناديق، transfers بالمصاريف، cheques، petty cash بالحد والرصيد، وbank reconciliation تمنع الإكمال مع فرق أو حركات غير مطابقة.
-- **Planned:** DLP التفصيلي.
+- **Implemented:** سجل DLP للعيوب والمسؤول والاستحقاق والمعالجة، ومنع إقفال المشروع مع عيوب مفتوحة.
 
 ## Reporting & Closeout — Implemented Core
 
@@ -77,7 +77,7 @@ Industrial Contracting, Supply Only, Supply & Installation, Maintenance, Service
 
 ## Local Data Model — Implemented
 
-Dexie schema version 12 يحتفظ بكل الجداول السابقة ويضيف جداول البنوك والشيكات والعهد والمطابقة. Backup v12 يشملها.
+Dexie schema version 13 يحتفظ بكل الجداول السابقة ويضيف WBS، progress، mobilization، overhead، inter-project، defects. Backup v13 يشملها.
 
 ## Quality Coverage
 

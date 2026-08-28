@@ -36,7 +36,7 @@
 
 `React UI → application services → domain/repository interfaces → Dexie/IndexedDB`
 
-لا تصل المكونات إلى Dexie مباشرة. قاعدة IndexedDB الحالية هي schema version 12: ترقيات additive تحتفظ بالإصدارات السابقة وتضيف المحاسبة والمجالات التشغيلية والموارد والأصول والبنوك.
+لا تصل المكونات إلى Dexie مباشرة. قاعدة IndexedDB الحالية هي schema version 13: ترقيات additive تحتفظ بالإصدارات السابقة وتضيف المحاسبة والمجالات التشغيلية والموارد والأصول والبنوك والتحكم في المشروع.
 
 لا يوجد Backend أو قاعدة سحابية أو API مدفوع أو متغيرات بيئة مطلوبة. البيانات تبقى على نفس المتصفح والجهاز وقد تختفي عند مسح بيانات المتصفح. ملف JSON الاحتياطي يحمل `schemaVersion` و`appVersion` و`createdAt` ويجب حفظه خارج المتصفح.
 
@@ -70,6 +70,7 @@ npm run build
 8. **Resources & Assets — Implemented core:** مصروفات، timesheets، معدات، أصول، إهلاك، وضمانات بنكية.
 9. **Banking — Implemented core:** حسابات وصناديق، تحويلات، شيكات، عهد ونثريات، وتسوية بنكية.
 10. **Reports & Reconciliation — Implemented:** Cash Flow، Project P&L، report center، drill-down، التسويات، تقييم المخزون ومطابقته مع GL، ومساعدة داخلية.
+11. **Project Control — Implemented:** WBS، progress، Earned Value، mobilization/demobilization، overhead، inter-project charges، DLP defects وضوابط الإقفال.
 
 كل دفعة تضيف وحداتها القابلة للاستخدام فقط إلى القائمة، وتربط مستنداتها بالنواة المحاسبية الحالية.
 

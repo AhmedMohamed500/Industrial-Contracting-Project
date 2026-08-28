@@ -11,6 +11,7 @@ import { ExecutionApp, type ExecutionModule } from '../../../src/components/exec
 import { ResourcesApp, type ResourcesModule } from '../../../src/components/resources/resources-app';
 import { BankingApp, type BankingModule } from '../../../src/components/banking/banking-app';
 import { InventoryReportsApp, type InventoryReportModule } from '../../../src/components/inventory/inventory-reports-app';
+import { ProjectControlApp, type ProjectControlModule } from '../../../src/components/project-control/project-control-app';
 
 const modules: AccountingModule[] = ['accounts','mapping','opening-balances','journals','adjustments','general-journal','ledger','trial-balance','financial-statements'];
 const commercialModules: CommercialModule[] = ['clients','suppliers','subcontractors','projects','contracts','boq','budgets','cost-centers','cost-codes','tenders','variations'];
@@ -24,6 +25,7 @@ const executionModules: ExecutionModule[] = ['subcontracts','client-ipc','materi
 const resourcesModules: ResourcesModule[] = ['expenses','timesheets','equipment','fixed-assets','depreciation','bank-guarantees'];
 const bankingModules: BankingModule[] = ['bank-accounts','bank-transfers','cheques','petty-cash','bank-reconciliation'];
 const inventoryReportModules: InventoryReportModule[] = ['inventory-valuation','inventory-reconciliation'];
+const projectControlModules: ProjectControlModule[] = ['wbs','project-control','earned-value','mobilization','overhead-allocation','inter-project','defects-liability'];
 
 export default async function AccountingModulePage({params}:{params:Promise<{module:string}>}) {
   const { module } = await params;
@@ -39,5 +41,6 @@ export default async function AccountingModulePage({params}:{params:Promise<{mod
   if (resourcesModules.includes(module as ResourcesModule)) return <ResourcesApp module={module as ResourcesModule}/>;
   if (bankingModules.includes(module as BankingModule)) return <BankingApp module={module as BankingModule}/>;
   if (inventoryReportModules.includes(module as InventoryReportModule)) return <InventoryReportsApp module={module as InventoryReportModule}/>;
+  if (projectControlModules.includes(module as ProjectControlModule)) return <ProjectControlApp module={module as ProjectControlModule}/>;
   notFound();
 }

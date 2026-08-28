@@ -1,0 +1,8 @@
+import type{BaseEntity}from'./foundation';
+export interface WBSNode extends BaseEntity{projectId:string;code:string;name:string;parentId?:string;budgetCost:number;plannedStart:string;plannedFinish:string;status:'planned'|'active'|'completed'|'cancelled'}
+export interface ProgressMeasurement extends BaseEntity{projectId:string;wbsId:string;date:string;plannedPercent:number;earnedPercent:number;actualCost:number;notes?:string}
+export interface EarnedValueSummary{projectId:string;budgetAtCompletion:number;plannedValue:number;earnedValue:number;actualCost:number;scheduleVariance:number;costVariance:number;spi:number;cpi:number;estimateAtCompletion:number}
+export interface MobilizationRecord extends BaseEntity{number:string;projectId:string;kind:'mobilization'|'demobilization';date:string;description:string;budget:number;actualCost:number;status:'planned'|'in_progress'|'completed'|'cancelled'}
+export interface OverheadAllocation extends BaseEntity{number:string;projectId:string;date:string;basis:'fixed'|'revenue'|'direct_cost'|'labor_hours';description:string;amount:number;status:'draft'|'approved'|'posted';journalId?:string}
+export interface InterProjectCharge extends BaseEntity{number:string;fromProjectId:string;toProjectId:string;date:string;description:string;amount:number;status:'draft'|'approved'|'posted';journalId?:string}
+export interface DefectRecord extends BaseEntity{number:string;projectId:string;handoverId?:string;raisedDate:string;dueDate:string;description:string;responsibleParty:string;resolution?:string;resolvedDate?:string;status:'open'|'in_progress'|'resolved'|'waived'}

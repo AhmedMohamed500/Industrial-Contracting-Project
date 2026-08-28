@@ -11,6 +11,7 @@ import type { CommercialNote, ServiceOrderRecord, SupplyLotRecord } from '../../
 import type { ClientIPC, ClientIPCLine, HandoverRecord, MaterialsOnSiteRecord, RetentionReleaseRecord, SubcontractRecord } from '../../domain/execution';
 import type { BankGuaranteeRecord, DepreciationRun, EquipmentRecord, EquipmentUsage, ExpenseRecord, FixedAssetRecord, TimesheetRecord } from '../../domain/resources';
 import type { BankReconciliation, BankStatementLine, BankTransfer, ChequeRecord, PettyCashFund, PettyCashTransaction } from '../../domain/banking';
+import type { DefectRecord, InterProjectCharge, MobilizationRecord, OverheadAllocation, ProgressMeasurement, WBSNode } from '../../domain/project-control';
 
 export class ErpLocalDatabase extends Dexie {
   companies!: EntityTable<Company, 'id'>;
@@ -84,6 +85,12 @@ export class ErpLocalDatabase extends Dexie {
   pettyCashTransactions!: EntityTable<PettyCashTransaction, 'id'>;
   bankStatementLines!: EntityTable<BankStatementLine, 'id'>;
   bankReconciliations!: EntityTable<BankReconciliation, 'id'>;
+  wbsNodes!: EntityTable<WBSNode, 'id'>;
+  progressMeasurements!: EntityTable<ProgressMeasurement, 'id'>;
+  mobilizationRecords!: EntityTable<MobilizationRecord, 'id'>;
+  overheadAllocations!: EntityTable<OverheadAllocation, 'id'>;
+  interProjectCharges!: EntityTable<InterProjectCharge, 'id'>;
+  defects!: EntityTable<DefectRecord, 'id'>;
 
   constructor() {
     super('industrial-contracting-erp');
@@ -178,6 +185,7 @@ export class ErpLocalDatabase extends Dexie {
     this.version(10).stores({subcontracts:'id, companyId, [companyId+number], projectId, subcontractorId, status',clientIPCs:'id, companyId, [companyId+number], projectId, contractId, clientId, date, status',clientIPCLines:'id, companyId, ipcId, boqItemId',materialsOnSite:'id, companyId, [companyId+number], projectId, contractId, boqItemId, status, ipcId',handovers:'id, companyId, [companyId+number], projectId, kind, date, status',retentionReleases:'id, companyId, [companyId+number], partyType, partyId, projectId, sourceType, sourceId, date, status'});
     this.version(11).stores({expenses:'id, companyId, [companyId+number], projectId, date, category, status',timesheets:'id, companyId, [companyId+number], projectId, employeeCode, date, status',equipment:'id, companyId, [companyId+code], projectId, kind, status',equipmentUsage:'id, companyId, [companyId+number], equipmentId, projectId, date, status',fixedAssets:'id, companyId, [companyId+code], category, purchaseDate, status',depreciationRuns:'id, companyId, [assetId+period], assetId, period, status',bankGuarantees:'id, companyId, [companyId+number], projectId, kind, issueDate, expiryDate, status'});
     this.version(12).stores({bankTransfers:'id, companyId, [companyId+number], fromTreasuryId, toTreasuryId, date, status',cheques:'id, companyId, [companyId+number], direction, treasuryId, partyType, partyId, dueDate, status',pettyCashFunds:'id, companyId, [companyId+code], treasuryId, status',pettyCashTransactions:'id, companyId, [companyId+number], fundId, projectId, date, kind, status',bankStatementLines:'id, companyId, treasuryId, date, reference, matched, matchedSourceId',bankReconciliations:'id, companyId, [companyId+number], treasuryId, periodEnd, status'});
+    this.version(13).stores({wbsNodes:'id, companyId, [companyId+projectId+code], projectId, parentId, status',progressMeasurements:'id, companyId, projectId, wbsId, date',mobilizationRecords:'id, companyId, [companyId+number], projectId, kind, date, status',overheadAllocations:'id, companyId, [companyId+number], projectId, date, basis, status',interProjectCharges:'id, companyId, [companyId+number], fromProjectId, toProjectId, date, status',defects:'id, companyId, [companyId+number], projectId, handoverId, raisedDate, dueDate, status'});
   }
 }
 
