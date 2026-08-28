@@ -1,18 +1,13 @@
 'use client';
 
 import { useMemo, useRef, useState } from 'react';
-import { AlertTriangle, ArchiveRestore, BarChart3, Boxes, Building2, CalendarRange, CheckCircle2, ChevronDown, Download, FileText, HardHat, Landmark, Menu, Plus, Settings, ShieldCheck, Upload, Users, WalletCards, X } from 'lucide-react';
+import { AlertTriangle, Boxes, Building2, CalendarRange, CheckCircle2, ChevronDown, Download, HardHat, Landmark, Menu, Plus, Upload, Users, WalletCards, X } from 'lucide-react';
 import type { BranchRepository } from '../domain/repositories';
 import type { Company, FoundationSnapshot } from '../domain/foundation';
 import { exportBackup, restoreBackup } from '../application/backup-service';
+import { ErpSidebar } from './erp-sidebar';
 
 type Props = { companies: Company[]; snapshot: FoundationSnapshot; branchRepository: BranchRepository; onCompanyChange: (id: string) => void; onNewCompany: () => void; onReload: () => void; };
-
-const nav = [
-  ['الرئيسية', BarChart3, true], ['ابدأ من هنا', CheckCircle2, true], ['تهيئة النظام', Settings, true], ['الشركات والفروع', Building2, true],
-  ['المشروعات', HardHat, false], ['العقود', FileText, false], ['العملاء', Users, false], ['الموردون', Users, false], ['المشتريات', WalletCards, false],
-  ['المخازن', Boxes, false], ['الخزينة والبنوك', Landmark, false], ['الحسابات العامة', ArchiveRestore, false], ['التقارير', BarChart3, false],
-] as const;
 
 export function Workspace({ companies, snapshot, branchRepository, onCompanyChange, onNewCompany, onReload }: Props) {
   const [mobileNav, setMobileNav] = useState(false);
@@ -48,18 +43,14 @@ export function Workspace({ companies, snapshot, branchRepository, onCompanyChan
   }
 
   return (
-    <main className="min-h-screen bg-[#f3f6f9] text-slate-900" dir="rtl">
+    <main className="min-h-screen bg-[#F6F8FB] text-[#1C2B3A]" dir="rtl">
       <div className="flex min-h-screen">
-        <aside className={`${mobileNav?'fixed inset-y-0 right-0 z-50 flex':'hidden'} w-[270px] shrink-0 flex-col bg-[#0c3156] p-5 text-white lg:flex`}>
-          <div className="mb-7 flex items-center justify-between"><div className="flex items-center gap-3"><span className="grid h-10 w-10 place-items-center rounded-xl bg-[#22a58b] font-black">م</span><div><p className="font-extrabold">منظومة المقاولات</p><p className="text-[10px] text-blue-100/60">LOCAL TRIAL EDITION</p></div></div><button className="lg:hidden" onClick={()=>setMobileNav(false)} aria-label="إغلاق القائمة"><X/></button></div>
-          <nav className="space-y-1">{nav.map(([label,Icon,active],index)=><button type="button" key={label} disabled={!active} className={`flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-right text-sm ${index===0?'bg-white/12 font-bold':active?'text-blue-50 hover:bg-white/8':'cursor-not-allowed text-blue-100/35'}`}><Icon size={17}/><span>{label}</span>{!active&&<span className="mr-auto text-[9px]">قريباً</span>}</button>)}</nav>
-          <div className="mt-auto rounded-xl border border-white/10 bg-white/5 p-4"><div className="flex items-center gap-2 text-xs font-bold"><ShieldCheck size={16} className="text-[#6de0c7]"/>بيانات محلية فقط</div><p className="mt-2 text-[11px] leading-5 text-blue-100/60">لا توجد مزامنة سحابية. أنشئ نسخة احتياطية دورياً.</p></div>
-        </aside>
+        <ErpSidebar open={mobileNav} onClose={()=>setMobileNav(false)}/>
 
         <section className="min-w-0 flex-1">
           <header className="sticky top-0 z-20 flex h-[72px] items-center justify-between border-b border-slate-200 bg-white/95 px-4 backdrop-blur sm:px-8"><div className="flex items-center gap-3"><button className="lg:hidden" onClick={()=>setMobileNav(true)} aria-label="فتح القائمة"><Menu/></button><div><p className="text-sm font-extrabold">{snapshot.company.arabicName}</p><p className="text-[11px] text-slate-500">{snapshot.company.code} · {snapshot.company.baseCurrency}</p></div></div><div className="flex items-center gap-2"><label className="relative hidden sm:block"><select aria-label="اختيار الشركة" value={snapshot.company.id} onChange={(e)=>onCompanyChange(e.target.value)} className="appearance-none rounded-xl border border-slate-200 bg-slate-50 py-2 pl-8 pr-3 text-xs font-bold outline-none">{companies.map((company)=><option key={company.id} value={company.id}>{company.arabicName}</option>)}</select><ChevronDown size={14} className="pointer-events-none absolute left-2.5 top-2.5 text-slate-500"/></label><button onClick={onNewCompany} className="flex items-center gap-1 rounded-xl bg-[#0c5f8f] px-3 py-2 text-xs font-bold text-white"><Plus size={15}/>شركة جديدة</button></div></header>
 
-          <div className="mx-auto max-w-[1320px] p-4 sm:p-8">
+          <div id="start" className="mx-auto max-w-[1320px] p-4 sm:p-8">
             <div className="mb-7 flex flex-col justify-between gap-4 sm:flex-row sm:items-end"><div><p className="mb-2 text-xs font-bold text-[#16836f]">مركز البدء</p><h1 className="text-2xl font-black text-[#0c3156] sm:text-3xl">صباح العمل، أساس شركتك جاهز</h1><p className="mt-2 text-sm text-slate-500">القيم المالية ستبقى صفراً حتى تسجل معاملاتك بنفسك.</p></div><div className="flex gap-2"><button onClick={downloadBackup} className="flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-xs font-bold"><Download size={16}/>نسخة احتياطية</button><button onClick={()=>fileRef.current?.click()} className="flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-xs font-bold"><Upload size={16}/>استعادة</button><input ref={fileRef} className="hidden" type="file" accept="application/json" onChange={(e)=>e.target.files?.[0]&&importBackup(e.target.files[0])}/></div></div>
             {message&&<div className="mb-5 flex items-center justify-between rounded-xl border border-blue-200 bg-blue-50 p-4 text-sm text-blue-800"><span>{message}</span><button onClick={()=>setMessage('')}><X size={16}/></button></div>}
 

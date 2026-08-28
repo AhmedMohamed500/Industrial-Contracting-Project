@@ -1,12 +1,12 @@
 import { APP_VERSION, SCHEMA_VERSION, type BackupEnvelope } from '../domain/foundation';
 import { getDatabase } from '../infrastructure/indexeddb/database';
 
-const TABLES = ['companies', 'branches', 'fiscalYears', 'accountingPeriods', 'taxes', 'treasuryAccounts', 'warehouses', 'projects', 'localProfiles', 'appSettings', 'auditEvents'] as const;
+const TABLES = ['companies', 'branches', 'fiscalYears', 'accountingPeriods', 'taxes', 'treasuryAccounts', 'warehouses', 'projects', 'localProfiles', 'appSettings', 'auditEvents', 'accounts', 'accountingMappings', 'journalEntries', 'journalLines'] as const;
 
 export function assertCompatibleBackup(value: unknown): asserts value is BackupEnvelope {
   if (!value || typeof value !== 'object') throw new Error('ملف النسخة الاحتياطية غير صالح');
   const backup = value as Partial<BackupEnvelope>;
-  if (backup.schemaVersion !== SCHEMA_VERSION) throw new Error(`إصدار النسخة غير متوافق. المطلوب: ${SCHEMA_VERSION}`);
+  if (!backup.schemaVersion || backup.schemaVersion < 1 || backup.schemaVersion > SCHEMA_VERSION) throw new Error(`إصدار النسخة غير متوافق. الحد الأقصى المدعوم: ${SCHEMA_VERSION}`);
   if (!backup.data || typeof backup.data !== 'object') throw new Error('بيانات النسخة الاحتياطية مفقودة');
 }
 

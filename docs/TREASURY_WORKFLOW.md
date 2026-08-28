@@ -1,5 +1,11 @@
-# Treasury Workflow
+# Treasury and Cash Forecast Workflow
 
-Status: cashbox/bank masters available; transactions pending Phase 9.
+## الحالة
 
-Receipts, payments, internal transfers, cheques, petty cash, and bank reconciliation use company-scoped accounts and open periods. A payment/receipt must allocate to a subledger document where applicable and link its journal. Bank reconciliation does not alter books silently; differences require controlled entries.
+**Partial:** optional cashbox/bank masters. **Planned:** all treasury transactions and forecasts.
+
+Receipts, payments, transfers, cheques, petty cash, and bank reconciliation use company-scoped accounts, open periods, approvals, and source allocations. Reconciliation never changes books silently; differences require controlled entries.
+
+Cash forecast entries link expected date, inflow/outflow, source document, project/contract when relevant, amount, currency, confidence, and scenario. Examples include client invoice/IPC collection, supplier PO/invoice payment, subcontract certificate, payroll/equipment, tax, retention and guarantee release.
+
+Profit, accounting cash balance, current liquidity, and forecast cash position are separate measures. Actual receipt/payment replaces or closes forecast exposure without deleting its history.

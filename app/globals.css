@@ -1,35 +1,51 @@
 @import 'tailwindcss';
 
-:root { --background: #f4f7fa; --foreground: #0f172a; }
+:root {
+  --background: #f6f8fb;
+  --card: #ffffff;
+  --sidebar: #17324d;
+  --sidebar-active: #244560;
+  --primary: #287c8e;
+  --accent: #35a89a;
+  --foreground: #1c2b3a;
+  --muted: #6e8093;
+  --border: #dde5ec;
+  --success: #2f9e73;
+  --warning: #d99a38;
+  --error: #d65c5c;
+  --info: #4d88c7;
+}
 * { box-sizing: border-box; }
 html { background: var(--background); scroll-behavior: smooth; }
 body { margin: 0; background: var(--background); color: var(--foreground); font-family: Tahoma, Arial, sans-serif; }
 button, input, select, textarea { font: inherit; }
 .field-label { display: grid; gap: 0.55rem; color: #334155; font-size: 0.8125rem; font-weight: 700; }
-.field-input { width: 100%; min-height: 46px; border: 1px solid #d9e1ea; border-radius: 0.75rem; background: #fbfdff; padding: 0.72rem 0.9rem; color: #0f172a; outline: none; transition: border-color 150ms, box-shadow 150ms, background 150ms; }
-.field-input:focus { border-color: #1c8a91; background: white; box-shadow: 0 0 0 3px rgb(28 138 145 / 12%); }
+.field-input { width: 100%; min-height: 46px; border: 1px solid var(--border); border-radius: 0.75rem; background: #fbfdff; padding: 0.72rem 0.9rem; color: var(--foreground); outline: none; transition: border-color 150ms, box-shadow 150ms, background 150ms; }
+.field-input:focus { border-color: var(--primary); background: white; box-shadow: 0 0 0 3px rgb(40 124 142 / 12%); }
 .field-input::placeholder { color: #9aa9ba; }
+.action-btn { display: inline-flex; align-items: center; gap: 0.35rem; border: 1px solid var(--border); border-radius: 0.65rem; background: white; padding: 0.55rem 0.75rem; font-size: 0.7rem; font-weight: 800; }
+.action-btn:hover { border-color: var(--primary); color: var(--primary); }
 
 .landing-grid {
   background-image:
-    linear-gradient(rgb(12 49 86 / 3%) 1px, transparent 1px),
-    linear-gradient(90deg, rgb(12 49 86 / 3%) 1px, transparent 1px);
+    linear-gradient(rgb(40 124 142 / 3%) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(40 124 142 / 3%) 1px, transparent 1px);
   background-size: 42px 42px;
 }
 
 .section-title {
-  color: #0c3156;
+  color: #17324d;
   font-size: clamp(1.9rem, 4vw, 2.75rem);
   font-weight: 900;
   line-height: 1.25;
   letter-spacing: -0.025em;
 }
 
-.section-title span { display: block; color: #16836f; }
-.section-copy { margin-top: 1rem; color: #5f6f82; font-size: 0.95rem; line-height: 2; }
+.section-title span { display: block; color: var(--primary); }
+.section-copy { margin-top: 1rem; color: var(--muted); font-size: 0.95rem; line-height: 2; }
 
 a:focus-visible, button:focus-visible, summary:focus-visible, input:focus-visible, select:focus-visible {
-  outline: 3px solid rgb(34 165 139 / 30%);
+  outline: 3px solid rgb(53 168 154 / 30%);
   outline-offset: 3px;
 }
 

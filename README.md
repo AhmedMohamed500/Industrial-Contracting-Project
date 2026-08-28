@@ -1,29 +1,55 @@
 # Industrial Contracting ERP — Frontend-Only Trial
 
-Arabic RTL ERP trial for industrial, electromechanical, MEP, installation, maintenance, steel, piping, and construction contractors. It is intended to let a company evaluate a guided accounting and project workflow before a production backend edition is commissioned.
+منظومة ERP عربية RTL مخططة لشركات المقاولات الصناعية والتوريدات والتركيب والصيانة والخدمات. الإصدار الحالي تجربة محلية لبناء أساس الشركة فقط؛ لا توجد معاملات تشغيلية أو محاسبية مكتملة حتى الآن.
 
-## Current Scope
+## أنواع العقود المستهدفة
 
-Phase 1 provides local company setup, fiscal periods, basic masters, company isolation, setup progress, and backup/restore. It starts empty and never seeds commercial values. Accounting and operational transaction modules are intentionally pending; see `PROJECT_STATUS.md`.
+- Industrial Contracting — مقاولات صناعية.
+- Supply Only — توريد فقط.
+- Supply & Installation — توريد وتركيب.
+- Maintenance — صيانة.
+- Service Contract — عقود خدمات.
 
-The public root route (`/`) is a premium Arabic marketing page explaining the integrated project, accounting, procurement, inventory, certificate, profitability, and management workflows. The existing ERP entry remains at `/setup`. Marketing mockup figures are presentational only and never create IndexedDB records. The primary CTA shows «جرّب النظام الآن» for a new browser and «فتح النظام» when a local company already exists.
+نوع العقد سيحدد دورة الكميات والتسليم والقبول والفوترة، مع استخدام نواة واحدة للمشروع والتكلفة والمحاسبة والتتبع.
 
-## Architecture and Data
+## الحالة الحالية
 
-The UI calls application services and repository interfaces. Current repositories persist to IndexedDB through Dexie. There is no backend, cloud database, paid API, or required environment variable. Data remains on the same browser/device and can disappear if browser storage is cleared.
+**Implemented:** صفحة تسويقية عربية، إعداد الشركة والفترات والتعريفات الأساسية والعزل والنسخ الاحتياطي، ودورة Accounting Core محلية: COA، mappings، opening/manual journals، approval/posting/reversal، general journal، ledger، trial balance، وfinancial statements أساسية.
 
-Backups are downloaded JSON envelopes containing `schemaVersion`, `appVersion`, and `createdAt`. Restore replaces local ERP records only after compatibility validation. Keep backup files outside the browser.
+**Planned/next batches:** الأطراف والعقود والمشروعات والتوريدات والمشتريات والمخزون ومقاولو الباطن والمستخلصات والخزينة والإقفال والتقارير التشغيلية. القائمة لا تعرض أي business module غير عامل.
 
-## Run Locally
+## معمارية التوريدات المخططة
 
-Requirements: Node.js 22.13 or newer.
+التزام العميل → Supply Contract → BOQ → Supply Schedule / Lot → Supply Requirement → Procurement → Supplier → Receipt أو Direct Delivery → Inspection → Delivery Note → Acceptance → Invoice / IPC → Collection → Supply Profitability.
+
+تظل الكميات منفصلة حسب المرحلة: Contracted, Scheduled, Required, Ordered, Purchased, In Transit, Received, Delivered, Accepted, Invoiced, Collected, Returned, Remaining. لا تُستنتج كمية مرحلة من أخرى بلا مستند.
+
+سيناريوهات التسليم المخططة:
+
+1. المورد → المخزن الرئيسي → العميل.
+2. المورد → مخزن المشروع → العميل.
+3. المورد → العميل مباشرة.
+
+السيناريو الثالث لا ينشئ دخولًا وخروجًا وهميًا من المخزن؛ يعتمد على إثبات التسليم والقبول وتخصيص التكلفة. التفاصيل في `docs/SUPPLY_WORKFLOW.md`.
+
+## المعمارية والبيانات
+
+`React UI → application services → domain/repository interfaces → Dexie/IndexedDB`
+
+لا تصل المكونات إلى Dexie مباشرة. قاعدة IndexedDB الحالية هي schema version 2: ترقية additive تضيف الحسابات والربط والقيود وتحافظ على كل بيانات v1. لا توجد جداول توريدات بعد؛ `src/domain/planned-operations.ts` يوثق المجال المستهدف فقط.
+
+لا يوجد Backend أو قاعدة سحابية أو API مدفوع أو متغيرات بيئة مطلوبة. البيانات تبقى على نفس المتصفح والجهاز وقد تختفي عند مسح بيانات المتصفح. ملف JSON الاحتياطي يحمل `schemaVersion` و`appVersion` و`createdAt` ويجب حفظه خارج المتصفح.
+
+## التشغيل المحلي
+
+يتطلب Node.js 22.13 أو أحدث.
 
 ```bash
 npm install
 npm run dev
 ```
 
-Quality checks:
+فحوص الجودة:
 
 ```bash
 npm run lint
@@ -32,14 +58,23 @@ npm test
 npm run build
 ```
 
-## Accounting and Project Costing
+## خارطة الطريق
 
-Financial statements will be generated from posted balanced journals only. Account IDs will come from company mappings, not module constants. Approved purchase orders/subcontracts create committed cost; actual cost is recognized by the configured receipt/invoice/certificate event. Warehouse transfer is not consumption; material issue creates project material cost. Profit and cash position remain separate measures.
+1. **Accounting Core — Implemented batch:** COA، mapping، opening/manual journals، posting/reversal، journal/ledger/trial balance/basic statements.
+2. **Contract & Project Core — Next:** الأطراف، أنواع العقود، العملاء، WBS/BOQ، الميزانية، baseline، التغييرات.
+3. **Phase 4 — Supply & Procurement Planning:** خطة/دفعات التوريد، المتطلبات، PR/RFQ/PO، التزامات الشراء.
+4. **Phase 5 — Receiving, Inventory & Direct Delivery:** الاستلام، الفحص، المخازن، التسليم المباشر، المرتجعات.
+5. **Phase 6 — Costing & Revenue:** تكلفة التوريد/المشروع، مستخلصات وفواتير العملاء، التحصيل والربحية.
+6. **Phase 7+ — Subcontractors, Treasury, Forecast, Closeout & Reporting:** الموردون ومقاولو الباطن والخزينة والتنبؤ وأداء المورد وإقفال المشروع والقوائم.
 
-## Deployment
+كل دفعة تضيف وحداتها القابلة للاستخدام فقط إلى القائمة، وتربط مستنداتها بالنواة المحاسبية الحالية.
 
-Official source: https://github.com/AhmedMohamed500/Industrial-Contracting-Project.git. Production deploys automatically from `main` to https://industrial-contracting-project.vercel.app as a frontend web app. Do not add Vercel storage, databases, server persistence, or backend environment variables.
+## النشر
 
-## Documentation
+المصدر الرسمي: https://github.com/AhmedMohamed500/Industrial-Contracting-Project.git
 
-Start with `AUDIT_ARCHITECTURE.md`, `PROJECT_STATUS.md`, and `docs/USER_GUIDE_AR.md`. Detailed accounting/workflow documents are updated phase by phase and must never imply unfinished modules are available.
+الإنتاج: https://industrial-contracting-project.vercel.app — الصفحة العامة `/`، والدخول للتجربة المحلية `/setup`. ينشر Vercel من `main` بلا تخزين أو Backend.
+
+## التوثيق
+
+ابدأ بـ `PROJECT_STATUS.md` و`AUDIT_ARCHITECTURE.md` و`docs/USER_GUIDE_AR.md`. تدفق التوريد مفصل في `docs/SUPPLY_WORKFLOW.md`. كل ملف يميز بوضوح بين Implemented وPartial وPlanned وNot Started.

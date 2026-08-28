@@ -120,3 +120,45 @@ Pure rule tests cover dates, balancing, transitions, tax/retention calculations,
 ## 20. Documentation Plan
 
 `PROJECT_STATUS.md` is the authoritative handoff. `README.md` explains the trial. Workflow and accounting documents under `docs/` are updated when their phases change. Documentation must distinguish implemented, partial, planned, and prohibited behavior.
+
+## 21. Architecture Expansion Audit — Contracts and Supply
+
+The existing layered direction remains valid: UI → application use cases → domain/repository contracts → storage implementation. Dexie schema version 2 is an additive migration: all v1 stores remain and accounts, accounting mappings, journal entries, and journal lines are added. The new `src/domain/planned-operations.ts` remains architecture-only and has no operational persistence tables.
+
+### Accounting Core implementation
+
+`src/domain/accounting.ts` defines company-scoped accounts, mapping keys, journal lifecycle, ledger and trial-balance views. `IndexedDBAccountingRepository` enforces active posting accounts, open periods, balanced entries, status transitions, immutable posted history, and opposite-entry reversals. Ledger, trial balance, Income Statement, and Balance Sheet are derived from posted journal lines rather than editable balance caches. Backup schema v2 includes all accounting stores and accepts legacy v1 envelopes.
+
+Future contract discriminators are `industrial_contracting`, `supply_only`, `supply_and_installation`, `maintenance`, and `service_contract`. Contract type controls workflow policy, not company isolation, ledger rules, or traceability.
+
+### Supply Domain
+
+The planned aggregate starts with `SupplyContract` and `SupplyBOQItem`. Delivery commitments are revisioned through `SupplySchedule` and `SupplyLot`; demand is explicit in `SupplyRequirement`. Fulfillment uses `SupplyDelivery`, `SupplyDeliveryLine`, `SupplyInspection`, and `SupplyReturn`. Landed/allocated amounts use `SupplyCostAllocation`.
+
+Quantity stages remain independent: contracted, scheduled, required, ordered, purchased, in transit, received, delivered, accepted, invoiced, collected, returned, and remaining. Each transition requires a source document and must be reversible without overwriting history.
+
+### Integration with Project and Contract
+
+Supply BOQ lines link to client contract and project dimensions. Supply & Installation keeps supplied, accepted, installed, certified, and invoiced quantities distinct. A supply-only contract may stop at acceptance before invoicing; an industrial contract may feed accepted material to installation/work-measurement flows.
+
+### Integration with Procurement
+
+Supply requirements can create or consolidate purchase requisitions. Approved purchase orders create committed cost, not received stock, accepted client quantity, actual cost, or supplier payable. Supplier, PO line, supply lot, BOQ line, project, and required-by date remain traceable.
+
+### Integration with Inventory and Direct Delivery
+
+Three scenarios are required: supplier → main warehouse → client; supplier → project warehouse → client; and supplier → client directly. Direct delivery records supplier dispatch, client delivery, inspection/acceptance, and cost allocation without manufacturing warehouse receipt/issue entries. Warehouse transfer is not consumption. Returns preserve origin and destination.
+
+### Integration with Accounting
+
+The Phase 2 posting engine remains the next implementation dependency. Future supply posting uses configured control accounts and open periods. Candidate events include receipt/GRNI, supplier invoice, purchase return, client invoice/IPC, collection, credit/debit note, cost allocation, and reversal. Approval of a schedule, lot, requirement, or PO does not create revenue or cash.
+
+### Future Backend Impact
+
+Planned repositories remain asynchronous and company-scoped so API implementations can replace IndexedDB. A production backend must add tenancy enforcement, identity/roles, optimistic concurrency, document numbering, atomic posting, idempotency, attachment storage, approvals, immutable audit, and server-side quantity controls. Local UUIDs and backup schema versions require explicit migration.
+
+## 22. Extended Planned Domains
+
+Architecture-only concepts also cover Service Orders, Site Material Requests, Material Reservations, Direct Site Receiving, Purchase Returns, credit/debit notes, Method Statements, mobilization/demobilization, site/company overhead, inter-project/intercompany movements, project closeout/handovers, DLP, retention/guarantee release, supplier performance, cash forecast, budget revision/change control, document center, and expanded cost types.
+
+None are implemented screens, workflows, posting rules, or Dexie tables. Delivery follows the roadmap after the accounting core.

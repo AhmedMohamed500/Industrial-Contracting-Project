@@ -1,101 +1,85 @@
-# Project Overview
+# Project Status
 
-Frontend-only Arabic Industrial Contracting ERP trial. The repository began empty. Phase 1 local foundation is implemented; later operational and accounting phases are not.
+## Status Legend
 
-# Current Architecture
+- **Implemented:** موجود ويعمل ومغطى بفحص مناسب.
+- **Partial:** أساس أو جزء محدود متاح، والدورة الكاملة غير متاحة.
+- **Planned:** تصميم/أنواع/توثيق أو عنصر تنقل فقط، بلا تشغيل أو persistence.
+- **Not Started:** لا يوجد تنفيذ بعد.
 
-Next-compatible React UI → application services → domain/repository interfaces → Dexie/IndexedDB repositories. No component accesses IndexedDB tables directly.
+## Foundation & Local Trial — Implemented
 
-# No Backend Policy
+- صفحة تسويقية عربية RTL في `/` ومسار ERP في `/setup`.
+- إعداد الشركة والسنة والفترات الشهرية والتعريفات الأساسية الاختيارية.
+- شركات متعددة مع عزل `companyId` وتبديل الشركة وإضافة الفروع.
+- حفظ مسودة الإعداد ونسخة JSON احتياطية واستعادة متوافقة مع الإصدار.
+- IndexedDB/Dexie schema v2 مع ترقية additive تحافظ على جداول وبيانات v1.
+- حالات صفرية صادقة؛ لا توجد معاملات أو أرصدة أو مشروعات تجريبية مصطنعة.
 
-No backend, API persistence, cloud database, paid service, or persistence environment variables. Data stays in the current browser. Local profiles are a trial simulation, not authentication.
+## Theme & Navigation — Implemented
 
-# Implemented Modules
+- **Implemented:** لوحة ألوان أهدأ، خلفية `#F6F8FB`، شريط جانبي `#17324D`، active `#244560`، primary `#287C8E`، accent `#35A89A`، وحدود `#DDE5EC`.
+- القائمة لم تعد roadmap: لا عناصر رمادية ولا «قريبًا». لا يظهر فيها الآن إلا الإدارة والنواة المحاسبية القابلتان للنقر والعمل؛ تُضاف المجموعات التشغيلية عند اكتمال كل دفعة.
 
-- Arabic RTL first-run wizard with draft recovery.
-- Premium Arabic RTL commercial landing page at `/`, with responsive navigation, workflow/accounting/project sections, marketing-only product mockups, FAQ, and SEO/Open Graph metadata.
-- Multiple isolated companies and company switcher.
-- Company, branch, fiscal year, generated accounting periods, optional tax, treasury, warehouse, and first-project foundation.
-- Setup progress and honest zero-data dashboard.
-- Versioned local backup/restore and audit event foundation.
-- Existing ERP/setup flow preserved at `/setup`; landing CTAs open that route and detect existing local companies without mutating data.
+## Contract Types — Planned
 
-# Pending Modules
+Industrial Contracting, Supply Only, Supply & Installation, Maintenance, Service Contract. توجد نماذج TypeScript تخطيطية، ولا توجد شاشة أو جدول persistence أو دورة اعتماد.
 
-All phase 2–17 modules are pending. Disabled navigation items are not implemented screens.
+## Supply Management — Planned
 
-# Accounting Cycle Status
+تم توثيق معمارية SupplyContract وSupplyBOQItem وSupplySchedule وSupplyLot وSupplyRequirement وSupplyDelivery وSupplyDeliveryLine وSupplyInspection وSupplyReturn وSupplyCostAllocation، مع repository contracts تخطيطية فقط. لا توجد جداول Dexie أو بيانات تشغيلية أو مستندات قابلة للحفظ.
 
-Pending Phase 2. No accounts, mappings, opening balances, journals, ledgers, trial balance, or posting engine exist yet. No financial transaction can be posted.
+## Accounting Cycle — Implemented Core / Partial Statements
 
-# Project Cycle Status
+- **Implemented:** دليل حسابات هرمي يدوي، بحث وتصنيف وحالة ومتطلبات dimensions، وقالب مقاولات اختياري لا يُنشأ إلا بعد تأكيد.
+- **Implemented:** ربط AR/AP/Inventory/GRNI/VAT/Revenue/Costs/Cash/Bank/Retention/Advances وغيرها بدون IDs ثابتة.
+- **Implemented:** مركز أرصدة افتتاحية وقيود يدوية بحالات draft → approved → posted، مع cancel قبل الترحيل وreversal بعده.
+- **Implemented:** منع ترحيل القيد غير المتوازن أو إلى حساب تجميعي/متوقف أو فترة مغلقة.
+- **Implemented:** اليومية العامة، الأستاذ الجاري، وميزان مراجعة مشتق من القيود المرحلة.
+- **Partial:** Income Statement وBalance Sheet مشتقتان من التصنيفات؛ Cash Flow وProject/Cost Center P&L والتسويات الدورية تأتي مع الوحدات التابعة.
 
-Only an optional project master placeholder can be created during setup. Contracts, hierarchy, BOQ, budget, baseline, variations, claims, and costing are pending Phase 3.
+## Project & Contract Cycle — Partial / Planned
 
-# Procurement Status
+- **Partial:** مشروع أول اختياري كـmaster بسيط أثناء الإعداد.
+- **Planned:** العقود، الأنواع، WBS، BOQ، الميزانية، baseline، التغييرات، MOS، mobilization/demobilization، overhead، inter-project/intercompany، التكلفة والربحية.
 
-Pending Phase 4.
+## Procurement — Planned
 
-# Inventory Status
+PR → RFQ → عروض → مقارنة → PO → receipt/direct delivery → supplier invoice → payment. لا يوجد تنفيذ أو persistence.
 
-Warehouse master foundation exists. Items, receipts, stock ledger, valuation, transfers, and issues are pending Phases 5–6.
+## Inventory — Partial / Planned
 
-# Subcontractor Status
+- **Partial:** warehouse master فقط.
+- **Planned:** items، reservations، receipts، stock ledger، valuation، transfers، issues، returns، adjustments، direct site receiving.
 
-Pending Phase 7.
+## Client, Supplier & Subcontractors — Not Started / Planned
 
-# Client Status
+مستخلصات/فواتير العميل والتحصيل، أداء المورد، مقاول الباطن، الاحتجاز، الدفعات المقدمة، credit/debit notes كلها مخططة فقط.
 
-Pending Phase 3 masters and Phase 8 certificates/revenue.
+## Treasury, Forecast & Closeout — Partial / Planned
 
-# Treasury Status
+- **Partial:** cashbox/bank masters اختيارية.
+- **Planned:** receipts/payments/cheques/reconciliation، cash forecast، practical completion، handovers، DLP، retention/guarantee release، final account، project close.
 
-Cashbox/bank master foundation can be created. Transactions, cheques, petty cash, and reconciliation are pending Phase 9.
+## Reporting — Partial
 
-# Closing Cycle Status
+اليومية والأستاذ وميزان المراجعة وقائمة الدخل والميزانية تعمل من القيود المحلية الفعلية. التقارير التشغيلية غير منفذة بعد. كل الرسومات التسويقية لا تُحفظ.
 
-Pending Phases 10–11.
+## Local Data Model — Implemented
 
-# Reporting Status
+Dexie schema version 2 يحتفظ بكل جداول v1 ويضيف accounts وaccountingMappings وjournalEntries وjournalLines. الترقية additive ولا تمس سجلات الشركات الحالية. Backup v2 يشمل جداول المحاسبة، وRestore يقبل ملفات v1 القديمة.
 
-Pending. Dashboard financial values are explicitly zero with no-transaction states.
+## Quality Coverage
 
-# Accounting Posting Matrix
+الاختبارات تغطي الفترات، توافق Backup v1/v2، الأساس الذري، منع تكرار الشركة، قالب الحسابات الاختياري، رفض القيد غير المتوازن، الترحيل، اتزان Trial Balance، والعكس بقيد مقابل.
 
-Designed in `AUDIT_ARCHITECTURE.md` and `docs/ACCOUNTING_POSTING_MATRIX.md`; no posting implementation yet.
+## Known Limitations
 
-# Local Data Model
+- البيانات محلية لجهاز ومتصفح واحد، ومسح التخزين قد يحذفها.
+- local profile ليس authentication.
+- لا Backend أو مزامنة أو multi-user أو صلاحيات إنتاجية.
+- نماذج TypeScript والصفحة التسويقية لا تعني أن الوحدات التشغيلية متاحة.
 
-IndexedDB schema version 1: companies, branches, fiscal years, periods, taxes, treasury accounts, warehouses, projects, local profiles, drafts, settings, and audit events. Company-owned records include `companyId`.
+## Deployment
 
-# Completed Work
-
-Repository audit, architecture package, application scaffold, Phase 1 data/domain/repository layers, guided UI, local persistence, company isolation, backup/restore, and initial automated tests.
-
-# Known Issues
-
-- Browser data can be cleared and is device-specific; backups are the user’s responsibility.
-- Logo upload is not included in Phase 1.
-- The scaffold dependency tree reports upstream audit advisories; no force upgrade was applied because it could break framework compatibility.
-- No blocking deployment issue is currently known. Production styling was verified after adding the required Tailwind PostCSS configuration.
-- Marketing visuals contain illustrative values only; they are isolated from ERP persistence and clearly labeled as presentational.
-
-# Pending Work
-
-Phase 2 accounting core is next. Do not start source-document modules before accounting balances and controls pass tests.
-
-# Tests
-
-Automated coverage includes period generation, backup compatibility, empty database behavior, atomic setup, optional zero records, and duplicate company-code rejection. Current command results are recorded at the end of the phase/commit report.
-
-# GitHub
-
-Official repository: https://github.com/AhmedMohamed500/Industrial-Contracting-Project.git
-
-# Vercel Deployment
-
-Live frontend: https://industrial-contracting-project.vercel.app. `/` is the marketing homepage and `/setup` is the local ERP entry. Production deploys from `main`; no Vercel database, storage, or backend feature is enabled or allowed.
-
-# Future Backend Migration
-
-Add API repository implementations behind current contracts, server authentication/authorization, concurrency controls, and database transactions. UI and application rules should remain largely unchanged.
+`main` هو فرع الإنتاج على https://industrial-contracting-project.vercel.app. لا Vercel DB أو Storage أو server persistence.

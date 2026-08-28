@@ -54,17 +54,17 @@ export function SetupWizard({ repository, onComplete, initialPayload = EMPTY_SET
   ] as const, [payload]);
 
   return (
-    <main className="min-h-screen bg-[#f4f7fa] text-slate-950" dir="rtl">
+    <main className="min-h-screen bg-[#F6F8FB] text-[#1C2B3A]" dir="rtl">
       <div className="mx-auto grid min-h-screen max-w-[1540px] grid-cols-1 lg:grid-cols-[330px_1fr]">
-        <aside className="relative overflow-hidden bg-[#0c3156] p-6 text-white lg:p-9">
+        <aside className="relative overflow-hidden bg-[#17324D] p-6 text-white lg:p-9">
           <div className="absolute -left-20 top-24 h-56 w-56 rounded-full border border-white/10" />
           <div className="relative">
-            <div className="mb-9 flex items-center gap-3"><span className="grid h-11 w-11 place-items-center rounded-xl bg-[#22a58b] text-lg font-black">م</span><div><p className="text-lg font-extrabold">منظومة المقاولات</p><p className="text-xs text-blue-100/70">Industrial Contracting ERP</p></div></div>
-            <p className="mb-4 text-xs font-bold text-[#6de0c7]">إعداد النظام لأول مرة</p>
+            <div className="mb-9 flex items-center gap-3"><span className="grid h-11 w-11 place-items-center rounded-xl bg-[#35A89A] text-lg font-black">م</span><div><p className="text-lg font-extrabold">منظومة المقاولات</p><p className="text-xs text-slate-300">Industrial Contracting ERP</p></div></div>
+            <p className="mb-4 text-xs font-bold text-[#72D6C8]">إعداد النظام لأول مرة</p>
             <nav aria-label="خطوات الإعداد" className="grid grid-cols-2 gap-1 lg:grid-cols-1">
               {steps.map(([title, description], index) => (
-                <button type="button" key={title} onClick={() => index < step && setStep(index)} className={`flex gap-3 rounded-xl px-3 py-2.5 text-right ${index === step ? 'bg-white/12' : index < step ? 'opacity-90' : 'opacity-45'}`}>
-                  <span className={`grid h-8 w-8 shrink-0 place-items-center rounded-lg text-xs font-bold ${index < step ? 'bg-[#22a58b]' : index === step ? 'border border-[#6de0c7] text-[#6de0c7]' : 'border border-white/25'}`}>{index < step ? <Check size={15} /> : String(index + 1).padStart(2, '0')}</span>
+                <button type="button" key={title} onClick={() => index < step && setStep(index)} className={`flex gap-3 rounded-xl px-3 py-2.5 text-right ${index === step ? 'bg-[#244560]' : index < step ? 'opacity-90' : 'opacity-45'}`}>
+                  <span className={`grid h-8 w-8 shrink-0 place-items-center rounded-lg text-xs font-bold ${index < step ? 'bg-[#35A89A]' : index === step ? 'border border-[#72D6C8] text-[#72D6C8]' : 'border border-white/25'}`}>{index < step ? <Check size={15} /> : String(index + 1).padStart(2, '0')}</span>
                   <span className="hidden lg:block"><span className="block text-sm font-bold">{title}</span><span className="mt-0.5 block text-[11px] leading-4 text-blue-100/65">{description}</span></span>
                 </button>
               ))}
@@ -76,7 +76,7 @@ export function SetupWizard({ repository, onComplete, initialPayload = EMPTY_SET
           <header className="flex items-center justify-between border-b border-slate-200 bg-white px-6 py-4 sm:px-10"><div><p className="text-sm font-bold text-slate-800">الإصدار التجريبي المحلي</p><p className="text-xs text-slate-500">بياناتك محفوظة على هذا الجهاز فقط</p></div><div className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs font-semibold text-slate-600">الخطوة {step + 1} من 10</div></header>
           <div className="flex flex-1 items-center justify-center p-5 sm:p-10">
             <div className="w-full max-w-[850px]">
-              <div className="mb-7"><div className="mb-4 flex items-center gap-3"><span className="h-1.5 w-12 rounded-full bg-[#22a58b]" /><span className="text-xs font-extrabold text-[#18816d]">{steps[step][1]}</span></div><h1 className="text-3xl font-black tracking-tight text-[#0c3156] sm:text-4xl">{steps[step][0]}</h1></div>
+              <div className="mb-7"><div className="mb-4 flex items-center gap-3"><span className="h-1.5 w-12 rounded-full bg-[#35A89A]" /><span className="text-xs font-extrabold text-[#287C8E]">{steps[step][1]}</span></div><h1 className="text-3xl font-black tracking-tight text-[#17324D] sm:text-4xl">{steps[step][0]}</h1></div>
               <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-[0_20px_55px_rgba(12,49,86,0.07)] sm:p-8">
                 {step === 0 && <CompanyStep payload={payload} update={update} />}
                 {step === 1 && <FiscalYearStep payload={payload} update={update} />}
@@ -89,7 +89,7 @@ export function SetupWizard({ repository, onComplete, initialPayload = EMPTY_SET
                 {step === 8 && <ReviewStep checks={checks} />}
                 {step === 9 && <FinishStep payload={payload} update={update} />}
                 {errors.length > 0 && <div role="alert" className="mt-5 rounded-xl border border-red-200 bg-red-50 p-4 text-sm text-red-800"><div className="mb-2 flex items-center gap-2 font-bold"><AlertCircle size={17}/>يرجى مراجعة الآتي</div><ul className="list-inside list-disc space-y-1">{errors.map((error)=><li key={error}>{error}</li>)}</ul></div>}
-                <div className="mt-7 flex items-center justify-between border-t border-slate-100 pt-5"><button type="button" disabled={step===0 || busy} onClick={()=>setStep((s)=>s-1)} className="flex items-center gap-1 rounded-xl border border-slate-200 px-5 py-2.5 text-sm font-bold text-slate-600 disabled:opacity-30"><ChevronRight size={17}/>السابق</button>{step < 9 ? <button type="button" onClick={next} className="flex items-center gap-1 rounded-xl bg-[#0c5f8f] px-7 py-3 text-sm font-extrabold text-white">حفظ والمتابعة<ChevronLeft size={17}/></button> : <button type="button" disabled={busy} onClick={finish} className="rounded-xl bg-[#16836f] px-7 py-3 text-sm font-extrabold text-white disabled:opacity-50">{busy?'جارٍ إنشاء الشركة...':'إنهاء الإعداد وبدء العمل'}</button>}</div>
+                <div className="mt-7 flex items-center justify-between border-t border-slate-100 pt-5"><button type="button" disabled={step===0 || busy} onClick={()=>setStep((s)=>s-1)} className="flex items-center gap-1 rounded-xl border border-slate-200 px-5 py-2.5 text-sm font-bold text-slate-600 disabled:opacity-30"><ChevronRight size={17}/>السابق</button>{step < 9 ? <button type="button" onClick={next} className="flex items-center gap-1 rounded-xl bg-[#287C8E] px-7 py-3 text-sm font-extrabold text-white">حفظ والمتابعة<ChevronLeft size={17}/></button> : <button type="button" disabled={busy} onClick={finish} className="rounded-xl bg-[#35A89A] px-7 py-3 text-sm font-extrabold text-white disabled:opacity-50">{busy?'جارٍ إنشاء الشركة...':'إنهاء الإعداد وبدء العمل'}</button>}</div>
               </div>
             </div>
           </div>
