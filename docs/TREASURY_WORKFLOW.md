@@ -2,7 +2,7 @@
 
 ## الحالة
 
-**Partial:** optional cashbox/bank masters. **Planned:** all treasury transactions and forecasts.
+**Implemented core:** source-allocated client receipts and supplier/subcontractor payments through cash/bank mappings, open-period GL posting, balance caps, and paid-state updates. Transfers, cheques, reconciliation, and cash forecast remain planned.
 
 Receipts, payments, transfers, cheques, petty cash, and bank reconciliation use company-scoped accounts, open periods, approvals, and source allocations. Reconciliation never changes books silently; differences require controlled entries.
 

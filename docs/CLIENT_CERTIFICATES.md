@@ -2,7 +2,7 @@
 
 ## الحالة
 
-**Not Started / Planned.**
+**Implemented core:** client invoice/IPC value, retention, advance recovery, VAT, net receivable, GL posting, partial/full collection, and paid status. Measurement/acceptance eligibility, detailed BOQ certification, credit notes, and retention release remain planned.
 
 Contract/BOQ → measured work or accepted supply → delivery/inspection evidence → IPC or invoice → receivable, VAT, retention and advance recovery → collection → retention release.
 

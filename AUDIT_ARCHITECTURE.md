@@ -174,3 +174,7 @@ Schema v4 adds supply plans, material requirements, purchase requisitions, RFQs,
 ## 25. Receiving, Inventory, and Direct Delivery Core
 
 Schema v5 adds item masters, goods receipts, immutable stock movements, client deliveries, delivery inspections, and purchase returns. Warehouse receipts and deliveries create traceable movements only when goods physically enter company control. Direct-to-client receipts and deliveries intentionally create no warehouse movement. Quantity caps prevent receipt above PO, delivery above receipt, inspection above delivery, and return above receipt or available warehouse stock.
+
+## 26. Billing, Subcontract Certificates, and Treasury Core
+
+Schema v6 adds client invoices, supplier invoices, subcontract certificates, and source-allocated cash transactions. Posting requires configured mappings and an open period, creates a balanced posted journal, stores the journal reference, and is idempotent on repeat. Receipts/payments cannot exceed the document balance and update paid amount/status. Detailed measurement certification, credit/debit notes, bank reconciliation, retention release, and forecasts remain future phases.

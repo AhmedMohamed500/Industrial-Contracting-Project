@@ -13,7 +13,7 @@
 - إعداد الشركة والسنة والفترات الشهرية والتعريفات الأساسية الاختيارية.
 - شركات متعددة مع عزل `companyId` وتبديل الشركة وإضافة الفروع.
 - حفظ مسودة الإعداد ونسخة JSON احتياطية واستعادة متوافقة مع الإصدار.
-- IndexedDB/Dexie schema v5 مع ترقيات additive تحافظ على جداول وبيانات v1/v2.
+- IndexedDB/Dexie schema v6 مع ترقيات additive تحافظ على جداول وبيانات v1/v2.
 - حالات صفرية صادقة؛ لا توجد معاملات أو أرصدة أو مشروعات تجريبية مصطنعة.
 
 ## Theme & Navigation — Implemented
@@ -55,12 +55,12 @@ Industrial Contracting, Supply Only, Supply & Installation, Maintenance, Service
 
 ## Client, Supplier & Subcontractors — Implemented Masters / Planned Transactions
 
-بيانات العملاء والموردين ومقاولي الباطن وشروط السداد وحد الائتمان تعمل محليًا. المستخلصات والتحصيل وأداء المورد ومستندات مقاول الباطن والاحتجاز والدفعات المقدمة وcredit/debit notes مخططة.
+بيانات الأطراف تعمل، وكذلك فواتير العميل والمورد ومستخلصات مقاول الباطن والاحتجاز واسترداد المقدم والتحصيل والسداد. أداء المورد والعقود التفصيلية وcredit/debit notes وإطلاق الاحتجاز مخططة.
 
-## Treasury, Forecast & Closeout — Partial / Planned
+## Treasury — Implemented Core / Forecast & Closeout Planned
 
-- **Partial:** cashbox/bank masters اختيارية.
-- **Planned:** receipts/payments/cheques/reconciliation، cash forecast، practical completion، handovers، DLP، retention/guarantee release، final account، project close.
+- **Implemented:** سندات قبض وصرف مخصصة لفواتير العميل والمورد ومستخلصات المقاول، منع تجاوز المستحق، تحديث part-paid/paid، وترحيل GL للبنك/النقدية وAR/AP.
+- **Planned:** transfers/cheques/reconciliation، cash forecast، practical completion، handovers، DLP، retention/guarantee release، final account، project close.
 
 ## Reporting — Partial
 
@@ -68,11 +68,11 @@ Industrial Contracting, Supply Only, Supply & Installation, Maintenance, Service
 
 ## Local Data Model — Implemented
 
-Dexie schema version 5 يحتفظ بجداول v1–v4 ويضيف inventoryItems وgoodsReceipts وstockMovements وclientDeliveries وdeliveryInspections وpurchaseReturns. Backup v5 يشملها ويقبل الإصدارات الأقدم.
+Dexie schema version 6 يحتفظ بجداول v1–v5 ويضيف clientInvoices وsupplierInvoices وsubcontractCertificates وcashTransactions. Backup v6 يشملها ويقبل الإصدارات الأقدم.
 
 ## Quality Coverage
 
-الاختبارات تغطي الأساس والمحاسبة والتجاري والمشتريات، والترحيل المخزني، منع تجاوز الكميات، التسليم المباشر بلا حركة وهمية، والفحص والمرتجعات.
+الاختبارات تغطي جميع الدفعات السابقة، وفواتير العملاء والموردين ومستخلصات المقاولين، نقص الربط المحاسبي، اتزان GL، السداد الجزئي/الكامل ومنع تجاوز الرصيد.
 
 ## Known Limitations
 
