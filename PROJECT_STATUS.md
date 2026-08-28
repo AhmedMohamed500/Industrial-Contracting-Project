@@ -13,7 +13,7 @@
 - إعداد الشركة والسنة والفترات الشهرية والتعريفات الأساسية الاختيارية.
 - شركات متعددة مع عزل `companyId` وتبديل الشركة وإضافة الفروع.
 - حفظ مسودة الإعداد ونسخة JSON احتياطية واستعادة متوافقة مع الإصدار.
-- IndexedDB/Dexie schema v11 مع ترقيات additive تحافظ على كل الإصدارات السابقة.
+- IndexedDB/Dexie schema v12 مع ترقيات additive تحافظ على كل الإصدارات السابقة.
 - حالات صفرية صادقة؛ لا توجد معاملات أو أرصدة أو مشروعات تجريبية مصطنعة.
 
 ## Theme & Navigation — Implemented
@@ -59,11 +59,12 @@ Industrial Contracting, Supply Only, Supply & Installation, Maintenance, Service
 
 بيانات الأطراف والعقود والفواتير ومستخلصات العملاء ومقاولي الباطن والاحتجاز والتحصيل/السداد وإطلاق الاحتجاز تعمل محليًا.
 
-## Treasury — Implemented Core / Forecast & Closeout Planned
+## Treasury & Banking — Implemented Core
 
 - **Implemented:** سندات قبض وصرف مخصصة لفواتير العميل والمورد ومستخلصات المقاول، منع تجاوز المستحق، تحديث part-paid/paid، وترحيل GL للبنك/النقدية وAR/AP.
 - **Implemented:** cash forecast، handovers، retention release، final account gates، project close.
-- **Planned:** transfers/cheques/reconciliation، DLP وguarantee register التفصيلي.
+- **Implemented:** الحسابات البنكية والصناديق، transfers بالمصاريف، cheques، petty cash بالحد والرصيد، وbank reconciliation تمنع الإكمال مع فرق أو حركات غير مطابقة.
+- **Planned:** DLP التفصيلي.
 
 ## Reporting & Closeout — Implemented Core
 
@@ -75,7 +76,7 @@ Industrial Contracting, Supply Only, Supply & Installation, Maintenance, Service
 
 ## Local Data Model — Implemented
 
-Dexie schema version 11 يحتفظ بكل الجداول السابقة ويضيف جداول الموارد والأصول والإهلاك والضمانات. Backup v11 يشملها.
+Dexie schema version 12 يحتفظ بكل الجداول السابقة ويضيف جداول البنوك والشيكات والعهد والمطابقة. Backup v12 يشملها.
 
 ## Quality Coverage
 

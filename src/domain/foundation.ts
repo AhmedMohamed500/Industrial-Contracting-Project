@@ -1,5 +1,5 @@
-export const SCHEMA_VERSION = 11;
-export const APP_VERSION = '0.11.0';
+export const SCHEMA_VERSION = 12;
+export const APP_VERSION = '0.12.0';
 
 export type EntityStatus = 'active' | 'inactive';
 export type FiscalYearStatus = 'open' | 'soft_closed' | 'closed';

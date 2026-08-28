@@ -44,6 +44,8 @@ const groups = [
   { title: 'الفوترة والخزينة', items: [
     ['مستخلصات وفواتير العملاء','/erp/client-invoices',FileText], ['فواتير الموردين','/erp/supplier-invoices',FileText],
     ['مستخلصات مقاولي الباطن','/erp/subcontract-certificates',FileCheck2], ['الخزينة والتحصيل والسداد','/erp/treasury',Landmark],
+    ['الصناديق والحسابات','/erp/bank-accounts',Landmark], ['التحويلات البنكية','/erp/bank-transfers',TrendingUp],
+    ['الشيكات','/erp/cheques',FileText], ['العهد والنثريات','/erp/petty-cash',Calculator], ['التسوية البنكية','/erp/bank-reconciliation',FileCheck2],
   ]},
   { title: 'التقارير والإقفال', items: [
     ['أداء وربحية المشروعات','/erp/project-performance',TrendingUp], ['التوقع النقدي','/erp/cash-forecast',BarChart3],

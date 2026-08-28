@@ -10,6 +10,7 @@ import type { MaterialIssue, SiteMaterialRequestRecord, StockAdjustment, StockCo
 import type { CommercialNote, ServiceOrderRecord, SupplyLotRecord } from '../../domain/supply-control';
 import type { ClientIPC, ClientIPCLine, HandoverRecord, MaterialsOnSiteRecord, RetentionReleaseRecord, SubcontractRecord } from '../../domain/execution';
 import type { BankGuaranteeRecord, DepreciationRun, EquipmentRecord, EquipmentUsage, ExpenseRecord, FixedAssetRecord, TimesheetRecord } from '../../domain/resources';
+import type { BankReconciliation, BankStatementLine, BankTransfer, ChequeRecord, PettyCashFund, PettyCashTransaction } from '../../domain/banking';
 
 export class ErpLocalDatabase extends Dexie {
   companies!: EntityTable<Company, 'id'>;
@@ -77,6 +78,12 @@ export class ErpLocalDatabase extends Dexie {
   fixedAssets!: EntityTable<FixedAssetRecord, 'id'>;
   depreciationRuns!: EntityTable<DepreciationRun, 'id'>;
   bankGuarantees!: EntityTable<BankGuaranteeRecord, 'id'>;
+  bankTransfers!: EntityTable<BankTransfer, 'id'>;
+  cheques!: EntityTable<ChequeRecord, 'id'>;
+  pettyCashFunds!: EntityTable<PettyCashFund, 'id'>;
+  pettyCashTransactions!: EntityTable<PettyCashTransaction, 'id'>;
+  bankStatementLines!: EntityTable<BankStatementLine, 'id'>;
+  bankReconciliations!: EntityTable<BankReconciliation, 'id'>;
 
   constructor() {
     super('industrial-contracting-erp');
@@ -170,6 +177,7 @@ export class ErpLocalDatabase extends Dexie {
     this.version(9).stores({supplyLots:'id, companyId, [companyId+number], projectId, contractId, boqItemId, plannedDeliveryDate, status',serviceOrders:'id, companyId, [companyId+number], projectId, supplierId, requiredBy, status',commercialNotes:'id, companyId, [companyId+number], partyType, partyId, sourceType, sourceId, date, status'});
     this.version(10).stores({subcontracts:'id, companyId, [companyId+number], projectId, subcontractorId, status',clientIPCs:'id, companyId, [companyId+number], projectId, contractId, clientId, date, status',clientIPCLines:'id, companyId, ipcId, boqItemId',materialsOnSite:'id, companyId, [companyId+number], projectId, contractId, boqItemId, status, ipcId',handovers:'id, companyId, [companyId+number], projectId, kind, date, status',retentionReleases:'id, companyId, [companyId+number], partyType, partyId, projectId, sourceType, sourceId, date, status'});
     this.version(11).stores({expenses:'id, companyId, [companyId+number], projectId, date, category, status',timesheets:'id, companyId, [companyId+number], projectId, employeeCode, date, status',equipment:'id, companyId, [companyId+code], projectId, kind, status',equipmentUsage:'id, companyId, [companyId+number], equipmentId, projectId, date, status',fixedAssets:'id, companyId, [companyId+code], category, purchaseDate, status',depreciationRuns:'id, companyId, [assetId+period], assetId, period, status',bankGuarantees:'id, companyId, [companyId+number], projectId, kind, issueDate, expiryDate, status'});
+    this.version(12).stores({bankTransfers:'id, companyId, [companyId+number], fromTreasuryId, toTreasuryId, date, status',cheques:'id, companyId, [companyId+number], direction, treasuryId, partyType, partyId, dueDate, status',pettyCashFunds:'id, companyId, [companyId+code], treasuryId, status',pettyCashTransactions:'id, companyId, [companyId+number], fundId, projectId, date, kind, status',bankStatementLines:'id, companyId, treasuryId, date, reference, matched, matchedSourceId',bankReconciliations:'id, companyId, [companyId+number], treasuryId, periodEnd, status'});
   }
 }
 
