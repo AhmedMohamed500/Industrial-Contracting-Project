@@ -1,0 +1,8 @@
+import type { BaseEntity } from './foundation';
+export interface ExpenseRecord extends BaseEntity { number:string;projectId?:string;date:string;category:string;description:string;amount:number;status:'draft'|'approved'|'posted'|'cancelled';journalId?:string }
+export interface TimesheetRecord extends BaseEntity { number:string;projectId:string;employeeCode:string;employeeName:string;date:string;regularHours:number;overtimeHours:number;hourlyRate:number;totalCost:number;status:'draft'|'approved'|'posted';journalId?:string }
+export interface EquipmentRecord extends BaseEntity { code:string;name:string;kind:'owned'|'rented';projectId?:string;hourlyRate:number;meterReading:number;status:'active'|'maintenance'|'inactive' }
+export interface EquipmentUsage extends BaseEntity { number:string;equipmentId:string;projectId:string;date:string;hours:number;cost:number;status:'draft'|'approved'|'posted';journalId?:string }
+export interface FixedAssetRecord extends BaseEntity { code:string;name:string;category:string;purchaseDate:string;cost:number;residualValue:number;usefulLifeMonths:number;accumulatedDepreciation:number;netBookValue:number;status:'active'|'disposed'|'inactive' }
+export interface DepreciationRun extends BaseEntity { number:string;assetId:string;period:string;amount:number;status:'draft'|'posted';journalId?:string }
+export interface BankGuaranteeRecord extends BaseEntity { number:string;projectId:string;bankName:string;beneficiary:string;kind:'bid'|'performance'|'advance'|'retention'|'other';issueDate:string;expiryDate:string;amount:number;status:'active'|'released'|'expired'|'cancelled' }

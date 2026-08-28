@@ -8,6 +8,7 @@ import { ReportingApp, type ReportingModule } from '../../../src/components/repo
 import { InventoryOperationsApp, type InventoryOperationsModule } from '../../../src/components/inventory/inventory-operations-app';
 import { SupplyControlApp, type SupplyControlModule } from '../../../src/components/supply/supply-control-app';
 import { ExecutionApp, type ExecutionModule } from '../../../src/components/execution/execution-app';
+import { ResourcesApp, type ResourcesModule } from '../../../src/components/resources/resources-app';
 
 const modules: AccountingModule[] = ['accounts','mapping','opening-balances','journals','general-journal','ledger','trial-balance','financial-statements'];
 const commercialModules: CommercialModule[] = ['clients','suppliers','subcontractors','projects','contracts','boq','budgets','cost-centers','cost-codes','tenders','variations'];
@@ -18,6 +19,7 @@ const reportingModules: ReportingModule[] = ['project-performance','cash-forecas
 const inventoryOperationsModules: InventoryOperationsModule[] = ['units','site-requests','reservations','warehouse-transfers','material-issues','stock-adjustments','stock-counts','waste'];
 const supplyControlModules: SupplyControlModule[] = ['supply-control','supply-lots','quantity-tracking','three-way-match','service-orders','commercial-notes'];
 const executionModules: ExecutionModule[] = ['subcontracts','client-ipc','materials-on-site','handovers','retention-releases'];
+const resourcesModules: ResourcesModule[] = ['expenses','timesheets','equipment','fixed-assets','depreciation','bank-guarantees'];
 
 export default async function AccountingModulePage({params}:{params:Promise<{module:string}>}) {
   const { module } = await params;
@@ -30,5 +32,6 @@ export default async function AccountingModulePage({params}:{params:Promise<{mod
   if (inventoryOperationsModules.includes(module as InventoryOperationsModule)) return <InventoryOperationsApp module={module as InventoryOperationsModule}/>;
   if (supplyControlModules.includes(module as SupplyControlModule)) return <SupplyControlApp module={module as SupplyControlModule}/>;
   if (executionModules.includes(module as ExecutionModule)) return <ExecutionApp module={module as ExecutionModule}/>;
+  if (resourcesModules.includes(module as ResourcesModule)) return <ResourcesApp module={module as ResourcesModule}/>;
   notFound();
 }

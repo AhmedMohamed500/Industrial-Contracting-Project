@@ -36,6 +36,11 @@ const groups = [
     ['Materials on Site','/erp/materials-on-site',Boxes], ['التسليم الجزئي والنهائي','/erp/handovers',CheckCircle2],
     ['إطلاق الاحتجاز','/erp/retention-releases',Landmark],
   ]},
+  { title: 'الموارد والأصول', items: [
+    ['المصروفات','/erp/expenses',FileText], ['العمالة وكشوف الوقت','/erp/timesheets',Users],
+    ['المعدات','/erp/equipment',Truck], ['الأصول الثابتة','/erp/fixed-assets',Building2],
+    ['الإهلاك','/erp/depreciation',Calculator], ['الضمانات البنكية','/erp/bank-guarantees',ShieldCheck],
+  ]},
   { title: 'الفوترة والخزينة', items: [
     ['مستخلصات وفواتير العملاء','/erp/client-invoices',FileText], ['فواتير الموردين','/erp/supplier-invoices',FileText],
     ['مستخلصات مقاولي الباطن','/erp/subcontract-certificates',FileCheck2], ['الخزينة والتحصيل والسداد','/erp/treasury',Landmark],

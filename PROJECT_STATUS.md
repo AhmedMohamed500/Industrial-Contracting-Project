@@ -13,7 +13,7 @@
 - إعداد الشركة والسنة والفترات الشهرية والتعريفات الأساسية الاختيارية.
 - شركات متعددة مع عزل `companyId` وتبديل الشركة وإضافة الفروع.
 - حفظ مسودة الإعداد ونسخة JSON احتياطية واستعادة متوافقة مع الإصدار.
-- IndexedDB/Dexie schema v10 مع ترقيات additive تحافظ على كل الإصدارات السابقة.
+- IndexedDB/Dexie schema v11 مع ترقيات additive تحافظ على كل الإصدارات السابقة.
 - حالات صفرية صادقة؛ لا توجد معاملات أو أرصدة أو مشروعات تجريبية مصطنعة.
 
 ## Theme & Navigation — Implemented
@@ -69,9 +69,13 @@ Industrial Contracting, Supply Only, Supply & Installation, Maintenance, Service
 
 اليومية والأستاذ وميزان المراجعة والقوائم تعمل من القيود الفعلية. تقرير أداء المشروع يشتق العقد والمفوتر والمحصل والملتزم والتكلفة والهامش والسيولة من المستندات. يعمل توقع النقد وأداء الموردين وإقفال الفترات والمشروعات بضوابط.
 
+## Resources & Assets — Implemented Core
+
+المصروفات، كشوف وقت العمالة مع overtime، المعدات وتكلفة التشغيل، الأصول الثابتة، الإهلاك الخطي المانع للتكرار، وسجل الضمانات البنكية تعمل محليًا، مع ترحيل التكاليف والإهلاك للأستاذ.
+
 ## Local Data Model — Implemented
 
-Dexie schema version 10 يحتفظ بكل الجداول السابقة ويضيف subcontracts، clientIPCs/lines، materialsOnSite، handovers، retentionReleases. Backup v10 يشملها.
+Dexie schema version 11 يحتفظ بكل الجداول السابقة ويضيف جداول الموارد والأصول والإهلاك والضمانات. Backup v11 يشملها.
 
 ## Quality Coverage
 
