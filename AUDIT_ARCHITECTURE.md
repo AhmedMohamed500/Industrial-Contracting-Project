@@ -178,3 +178,7 @@ Schema v5 adds item masters, goods receipts, immutable stock movements, client d
 ## 26. Billing, Subcontract Certificates, and Treasury Core
 
 Schema v6 adds client invoices, supplier invoices, subcontract certificates, and source-allocated cash transactions. Posting requires configured mappings and an open period, creates a balanced posted journal, stores the journal reference, and is idempotent on repeat. Receipts/payments cannot exceed the document balance and update paid amount/status. Detailed measurement certification, credit/debit notes, bank reconciliation, retention release, and forecasts remain future phases.
+
+## 27. Reporting, Forecast, and Closing Core
+
+Schema v7 adds cash forecasts, supplier reviews, and project closeouts. Project performance is derived from persisted contracts, invoices, collections, POs, supplier invoices, and subcontract certificates rather than editable KPI caches. Period close rejects pending journals. Final project close requires handover, final account, retention/guarantee release, and zero open items. Formal year-end closing entries and bank reconciliation remain documented limitations.

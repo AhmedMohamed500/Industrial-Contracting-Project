@@ -4,12 +4,14 @@ import { CommercialApp, type CommercialModule } from '../../../src/components/co
 import { ProcurementApp, type ProcurementModule } from '../../../src/components/procurement/procurement-app';
 import { InventoryApp, type InventoryModule } from '../../../src/components/inventory/inventory-app';
 import { FinanceApp, type FinanceModule } from '../../../src/components/finance/finance-app';
+import { ReportingApp, type ReportingModule } from '../../../src/components/reporting/reporting-app';
 
 const modules: AccountingModule[] = ['accounts','mapping','opening-balances','journals','general-journal','ledger','trial-balance','financial-statements'];
 const commercialModules: CommercialModule[] = ['clients','suppliers','subcontractors','projects','contracts','boq','budgets','cost-centers','cost-codes','tenders','variations'];
 const procurementModules: ProcurementModule[] = ['supply-plans','material-requirements','purchase-requisitions','rfqs','supplier-quotes','purchase-orders'];
 const inventoryModules: InventoryModule[] = ['items','goods-receipts','stock-ledger','client-deliveries','delivery-inspections','purchase-returns'];
 const financeModules: FinanceModule[] = ['client-invoices','supplier-invoices','subcontract-certificates','treasury'];
+const reportingModules: ReportingModule[] = ['project-performance','cash-forecast','supplier-performance','period-close','project-closeout'];
 
 export default async function AccountingModulePage({params}:{params:Promise<{module:string}>}) {
   const { module } = await params;
@@ -18,5 +20,6 @@ export default async function AccountingModulePage({params}:{params:Promise<{mod
   if (procurementModules.includes(module as ProcurementModule)) return <ProcurementApp module={module as ProcurementModule}/>;
   if (inventoryModules.includes(module as InventoryModule)) return <InventoryApp module={module as InventoryModule}/>;
   if (financeModules.includes(module as FinanceModule)) return <FinanceApp module={module as FinanceModule}/>;
+  if (reportingModules.includes(module as ReportingModule)) return <ReportingApp module={module as ReportingModule}/>;
   notFound();
 }

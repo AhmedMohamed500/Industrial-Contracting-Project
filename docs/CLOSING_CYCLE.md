@@ -2,7 +2,7 @@
 
 ## الحالة
 
-**Not Started / Planned.**
+**Implemented core:** periods close only when no draft/approved journals remain and can be reopened locally. Project closeout requires final handover, final account agreement, retention and guarantee release, and no open items. Automated year-end retained earnings, reconciliations, and formal close packs remain planned.
 
 Month-end covers bank/cash, AR/AP/subcontractors, inventory/GRNI, accruals/prepayments, depreciation, tax, project/supply cost, WIP/revenue, forecast updates, trial balance and statements. Closed periods reject posting and backdating.
 

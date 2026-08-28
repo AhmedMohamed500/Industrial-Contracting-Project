@@ -56,4 +56,4 @@
 
 ## التسلسل المستهدف
 
-Accounting Core (منفذ) → Contract/Project Core (منفذ) → Supply Planning & Procurement (منفذ) → Receiving/Inventory/Direct Delivery (منفذ) → Client/Supplier/Subcontract Billing & Treasury (منفذ) → Subcontractors/Treasury/Forecast → Closing/Reporting/Project Closeout.
+Accounting Core → Contract/Project → Supply/Procurement → Receiving/Inventory/Direct Delivery → Billing/Treasury → Supplier Performance/Forecast/Closing/Reporting: جميعها منفذة كنواة تجريبية محلية.

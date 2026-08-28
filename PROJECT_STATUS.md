@@ -13,7 +13,7 @@
 - إعداد الشركة والسنة والفترات الشهرية والتعريفات الأساسية الاختيارية.
 - شركات متعددة مع عزل `companyId` وتبديل الشركة وإضافة الفروع.
 - حفظ مسودة الإعداد ونسخة JSON احتياطية واستعادة متوافقة مع الإصدار.
-- IndexedDB/Dexie schema v6 مع ترقيات additive تحافظ على جداول وبيانات v1/v2.
+- IndexedDB/Dexie schema v7 مع ترقيات additive تحافظ على جداول وبيانات v1/v2.
 - حالات صفرية صادقة؛ لا توجد معاملات أو أرصدة أو مشروعات تجريبية مصطنعة.
 
 ## Theme & Navigation — Implemented
@@ -62,17 +62,17 @@ Industrial Contracting, Supply Only, Supply & Installation, Maintenance, Service
 - **Implemented:** سندات قبض وصرف مخصصة لفواتير العميل والمورد ومستخلصات المقاول، منع تجاوز المستحق، تحديث part-paid/paid، وترحيل GL للبنك/النقدية وAR/AP.
 - **Planned:** transfers/cheques/reconciliation، cash forecast، practical completion، handovers، DLP، retention/guarantee release، final account، project close.
 
-## Reporting — Partial
+## Reporting & Closeout — Implemented Core
 
-اليومية والأستاذ وميزان المراجعة وقائمة الدخل والميزانية تعمل من القيود المحلية الفعلية. التقارير التشغيلية غير منفذة بعد. كل الرسومات التسويقية لا تُحفظ.
+اليومية والأستاذ وميزان المراجعة والقوائم تعمل من القيود الفعلية. تقرير أداء المشروع يشتق العقد والمفوتر والمحصل والملتزم والتكلفة والهامش والسيولة من المستندات. يعمل توقع النقد وأداء الموردين وإقفال الفترات والمشروعات بضوابط.
 
 ## Local Data Model — Implemented
 
-Dexie schema version 6 يحتفظ بجداول v1–v5 ويضيف clientInvoices وsupplierInvoices وsubcontractCertificates وcashTransactions. Backup v6 يشملها ويقبل الإصدارات الأقدم.
+Dexie schema version 7 يحتفظ بجداول v1–v6 ويضيف cashForecasts وsupplierReviews وprojectCloseouts. Backup v7 يشمل كل الجداول ويقبل الإصدارات الأقدم.
 
 ## Quality Coverage
 
-الاختبارات تغطي جميع الدفعات السابقة، وفواتير العملاء والموردين ومستخلصات المقاولين، نقص الربط المحاسبي، اتزان GL، السداد الجزئي/الكامل ومنع تجاوز الرصيد.
+الاختبارات تغطي جميع الدفعات، والتقارير المشتقة، التوقع المرجح، تقييم المورد، منع إقفال فترة بقيود معلقة، وضوابط الإقفال النهائي للمشروع.
 
 ## Known Limitations
 

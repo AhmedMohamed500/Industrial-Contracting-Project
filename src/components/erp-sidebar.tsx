@@ -32,6 +32,11 @@ const groups = [
     ['مستخلصات وفواتير العملاء','/erp/client-invoices',FileText], ['فواتير الموردين','/erp/supplier-invoices',FileText],
     ['مستخلصات مقاولي الباطن','/erp/subcontract-certificates',FileCheck2], ['الخزينة والتحصيل والسداد','/erp/treasury',Landmark],
   ]},
+  { title: 'التقارير والإقفال', items: [
+    ['أداء وربحية المشروعات','/erp/project-performance',TrendingUp], ['التوقع النقدي','/erp/cash-forecast',BarChart3],
+    ['أداء الموردين','/erp/supplier-performance',Users], ['إقفال الفترات','/erp/period-close',ArchiveRestore],
+    ['إقفال المشروعات','/erp/project-closeout',CheckCircle2],
+  ]},
   { title: 'المالية', items: [
     ['دليل الحسابات','/erp/accounts',ListTree], ['الربط المحاسبي','/erp/mapping',FileCheck2],
     ['الأرصدة الافتتاحية','/erp/opening-balances',Calculator], ['القيود اليومية','/erp/journals',FileText],
