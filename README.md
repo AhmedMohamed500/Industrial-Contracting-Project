@@ -1,6 +1,6 @@
 # Industrial Contracting ERP — Frontend-Only Trial
 
-منظومة ERP عربية RTL مخططة لشركات المقاولات الصناعية والتوريدات والتركيب والصيانة والخدمات. الإصدار الحالي تجربة محلية لبناء أساس الشركة فقط؛ لا توجد معاملات تشغيلية أو محاسبية مكتملة حتى الآن.
+منظومة ERP عربية RTL تعمل محليًا لشركات المقاولات الصناعية والتوريدات والتركيب والصيانة والخدمات. الإصدار الحالي يضم أساس الشركة، النواة المحاسبية، وإدارة الأطراف والمشروعات والعقود والمناقصات وBOQ والموازنات والتغييرات.
 
 ## أنواع العقود المستهدفة
 
@@ -14,9 +14,9 @@
 
 ## الحالة الحالية
 
-**Implemented:** صفحة تسويقية عربية، إعداد الشركة والفترات والتعريفات الأساسية والعزل والنسخ الاحتياطي، ودورة Accounting Core محلية: COA، mappings، opening/manual journals، approval/posting/reversal، general journal، ledger، trial balance، وfinancial statements أساسية.
+**Implemented:** صفحة تسويقية عربية، إعداد الشركة والفترات والتعريفات الأساسية والعزل والنسخ الاحتياطي، ودورة Accounting Core محلية، والعملاء والموردون ومقاولو الباطن، والمشروعات والعقود والمناقصات وتحويل الفوز إلى مشروع وعقد، وBOQ والموازنات ومراكز/أكواد التكلفة والتغييرات.
 
-**Planned/next batches:** الأطراف والعقود والمشروعات والتوريدات والمشتريات والمخزون ومقاولو الباطن والمستخلصات والخزينة والإقفال والتقارير التشغيلية. القائمة لا تعرض أي business module غير عامل.
+**Planned/next batches:** تخطيط التوريدات والمشتريات والمخزون ومستندات مقاولي الباطن والمستخلصات والخزينة والإقفال والتقارير التشغيلية. القائمة لا تعرض أي business module غير عامل.
 
 ## معمارية التوريدات المخططة
 
@@ -36,7 +36,7 @@
 
 `React UI → application services → domain/repository interfaces → Dexie/IndexedDB`
 
-لا تصل المكونات إلى Dexie مباشرة. قاعدة IndexedDB الحالية هي schema version 2: ترقية additive تضيف الحسابات والربط والقيود وتحافظ على كل بيانات v1. لا توجد جداول توريدات بعد؛ `src/domain/planned-operations.ts` يوثق المجال المستهدف فقط.
+لا تصل المكونات إلى Dexie مباشرة. قاعدة IndexedDB الحالية هي schema version 3: ترقيات additive تحتفظ ببيانات v1/v2 وتضيف الأطراف والعقود وBOQ والموازنات والأبعاد والمناقصات والتغييرات. لا توجد جداول توريدات بعد؛ `src/domain/planned-operations.ts` يوثق المجال المستهدف فقط.
 
 لا يوجد Backend أو قاعدة سحابية أو API مدفوع أو متغيرات بيئة مطلوبة. البيانات تبقى على نفس المتصفح والجهاز وقد تختفي عند مسح بيانات المتصفح. ملف JSON الاحتياطي يحمل `schemaVersion` و`appVersion` و`createdAt` ويجب حفظه خارج المتصفح.
 
@@ -61,7 +61,7 @@ npm run build
 ## خارطة الطريق
 
 1. **Accounting Core — Implemented batch:** COA، mapping، opening/manual journals، posting/reversal، journal/ledger/trial balance/basic statements.
-2. **Contract & Project Core — Next:** الأطراف، أنواع العقود، العملاء، WBS/BOQ، الميزانية، baseline، التغييرات.
+2. **Contract & Project Core — Implemented batch:** الأطراف، أنواع العقود، المشروعات، العقود، BOQ، الميزانيات، مراكز/أكواد التكلفة، المناقصات والتغييرات.
 3. **Phase 4 — Supply & Procurement Planning:** خطة/دفعات التوريد، المتطلبات، PR/RFQ/PO، التزامات الشراء.
 4. **Phase 5 — Receiving, Inventory & Direct Delivery:** الاستلام، الفحص، المخازن، التسليم المباشر، المرتجعات.
 5. **Phase 6 — Costing & Revenue:** تكلفة التوريد/المشروع، مستخلصات وفواتير العملاء، التحصيل والربحية.

@@ -2,7 +2,7 @@
 
 ## الحالة
 
-**Planned architecture; no cost engine or financial data exists.**
+**Partial:** BOQ unit budget cost, project budget versions, cost centers, cost codes, and variation impacts persist. Commitments, actual allocations, ETC/EAC, earned value, and profitability remain planned.
 
 Dimensions: company, contract, contract type, project, WBS, cost center, cost code, BOQ/supply BOQ item, supply lot, supplier/subcontractor, source, and date.
 

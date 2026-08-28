@@ -2,12 +2,21 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { ArchiveRestore, BarChart3, BookOpen, Building2, Calculator, CheckCircle2, FileCheck2, FileSpreadsheet, FileText, Landmark, ListTree, Settings, ShieldCheck, X } from 'lucide-react';
+import { ArchiveRestore, BarChart3, BookOpen, Boxes, Building2, Calculator, CheckCircle2, FileCheck2, FileSpreadsheet, FileText, Handshake, Landmark, ListTree, Settings, ShieldCheck, Tags, TrendingUp, Users, X } from 'lucide-react';
 
 const groups = [
   { title: 'الإدارة', items: [
     ['الرئيسية','/setup',BarChart3], ['ابدأ من هنا','/setup#start',CheckCircle2],
     ['تهيئة النظام','/setup#setup-progress',Settings], ['الشركات والفروع','/setup#companies',Building2],
+  ]},
+  { title: 'المشروعات والعقود', items: [
+    ['المشروعات','/erp/projects',Building2], ['العقود','/erp/contracts',Handshake],
+    ['المناقصات والتسعير','/erp/tenders',FileSpreadsheet], ['BOQ','/erp/boq',ListTree],
+    ['الميزانيات','/erp/budgets',Calculator], ['مراكز التكلفة','/erp/cost-centers',Boxes],
+    ['أكواد التكلفة','/erp/cost-codes',Tags], ['التغييرات والمطالبات','/erp/variations',TrendingUp],
+  ]},
+  { title: 'الأطراف', items: [
+    ['العملاء','/erp/clients',Users], ['الموردون','/erp/suppliers',Users], ['مقاولو الباطن','/erp/subcontractors',Users],
   ]},
   { title: 'المالية', items: [
     ['دليل الحسابات','/erp/accounts',ListTree], ['الربط المحاسبي','/erp/mapping',FileCheck2],

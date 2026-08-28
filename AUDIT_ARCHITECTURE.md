@@ -162,3 +162,7 @@ Planned repositories remain asynchronous and company-scoped so API implementatio
 Architecture-only concepts also cover Service Orders, Site Material Requests, Material Reservations, Direct Site Receiving, Purchase Returns, credit/debit notes, Method Statements, mobilization/demobilization, site/company overhead, inter-project/intercompany movements, project closeout/handovers, DLP, retention/guarantee release, supplier performance, cash forecast, budget revision/change control, document center, and expanded cost types.
 
 None are implemented screens, workflows, posting rules, or Dexie tables. Delivery follows the roadmap after the accounting core.
+
+## 23. Commercial and Project Core Implementation
+
+Schema v3 adds company-scoped parties, contracts, BOQ items, project budget lines, cost dimensions, tenders, and variations while retaining v1/v2 stores. Implemented screens expose working CRUD and state actions only. Tender conversion creates its project and contract in one Dexie transaction and returns the same identifiers when repeated. Approved variation revenue is recomputed from source variations and updates contract revised value atomically. Supply, procurement, inventory, client billing, and actual-cost posting remain outside this batch.
