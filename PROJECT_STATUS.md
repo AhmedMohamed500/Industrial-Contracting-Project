@@ -13,7 +13,7 @@
 - إعداد الشركة والسنة والفترات الشهرية والتعريفات الأساسية الاختيارية.
 - شركات متعددة مع عزل `companyId` وتبديل الشركة وإضافة الفروع.
 - حفظ مسودة الإعداد ونسخة JSON احتياطية واستعادة متوافقة مع الإصدار.
-- IndexedDB/Dexie schema v9 مع ترقيات additive تحافظ على كل الإصدارات السابقة.
+- IndexedDB/Dexie schema v10 مع ترقيات additive تحافظ على كل الإصدارات السابقة.
 - حالات صفرية صادقة؛ لا توجد معاملات أو أرصدة أو مشروعات تجريبية مصطنعة.
 
 ## Theme & Navigation — Implemented
@@ -42,7 +42,8 @@ Industrial Contracting, Supply Only, Supply & Installation, Maintenance, Service
 
 - **Implemented:** CRUD للعملاء والموردين ومقاولي الباطن والمشروعات والعقود، مع تحقق الأكواد وربط الشركة والعميل والمشروع.
 - **Implemented:** مناقصات وتحويل ذري ومتكرر بأمان للمناقصة الفائزة إلى مشروع وعقد؛ BOQ وموازنات ومراكز/أكواد تكلفة وتغييرات تعيد حساب العقد عند الاعتماد.
-- **Planned:** WBS/MOS، mobilization/demobilization، overhead، inter-project/intercompany، actual cost والربحية والإقفال.
+- **Implemented:** عقود مقاولي الباطن، Materials on Site، IPC بخطوط BOQ تراكمية، التسليم الجزئي/النهائي، وإطلاق الاحتجاز.
+- **Planned:** WBS، mobilization/demobilization، overhead، inter-project/intercompany، DLP التفصيلي.
 
 ## Procurement — Implemented Core / Planned Fulfillment
 
@@ -56,12 +57,13 @@ Industrial Contracting, Supply Only, Supply & Installation, Maintenance, Service
 
 ## Client, Supplier & Subcontractors — Implemented Masters / Planned Transactions
 
-بيانات الأطراف تعمل، وكذلك فواتير العميل والمورد ومستخلصات مقاول الباطن والاحتجاز واسترداد المقدم والتحصيل والسداد. أداء المورد والعقود التفصيلية وcredit/debit notes وإطلاق الاحتجاز مخططة.
+بيانات الأطراف والعقود والفواتير ومستخلصات العملاء ومقاولي الباطن والاحتجاز والتحصيل/السداد وإطلاق الاحتجاز تعمل محليًا.
 
 ## Treasury — Implemented Core / Forecast & Closeout Planned
 
 - **Implemented:** سندات قبض وصرف مخصصة لفواتير العميل والمورد ومستخلصات المقاول، منع تجاوز المستحق، تحديث part-paid/paid، وترحيل GL للبنك/النقدية وAR/AP.
-- **Planned:** transfers/cheques/reconciliation، cash forecast، practical completion، handovers، DLP، retention/guarantee release، final account، project close.
+- **Implemented:** cash forecast، handovers، retention release، final account gates، project close.
+- **Planned:** transfers/cheques/reconciliation، DLP وguarantee register التفصيلي.
 
 ## Reporting & Closeout — Implemented Core
 
@@ -69,7 +71,7 @@ Industrial Contracting, Supply Only, Supply & Installation, Maintenance, Service
 
 ## Local Data Model — Implemented
 
-Dexie schema version 9 يحتفظ بجداول v1–v8 ويضيف supplyLots وserviceOrders وcommercialNotes. Backup v9 يشمل كل الجداول.
+Dexie schema version 10 يحتفظ بكل الجداول السابقة ويضيف subcontracts، clientIPCs/lines، materialsOnSite، handovers، retentionReleases. Backup v10 يشملها.
 
 ## Quality Coverage
 

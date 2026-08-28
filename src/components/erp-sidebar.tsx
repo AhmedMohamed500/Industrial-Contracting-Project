@@ -31,6 +31,11 @@ const groups = [
     ['التسويات','/erp/stock-adjustments',Calculator], ['الجرد','/erp/stock-counts',FileSpreadsheet], ['الهالك','/erp/waste',X],
     ['الفحص والقبول','/erp/delivery-inspections',FileCheck2], ['مرتجعات المورد','/erp/purchase-returns',ArchiveRestore],
   ]},
+  { title: 'التنفيذ والمستخلصات', items: [
+    ['عقود مقاولي الباطن','/erp/subcontracts',Handshake], ['مستخلصات العملاء IPC','/erp/client-ipc',FileCheck2],
+    ['Materials on Site','/erp/materials-on-site',Boxes], ['التسليم الجزئي والنهائي','/erp/handovers',CheckCircle2],
+    ['إطلاق الاحتجاز','/erp/retention-releases',Landmark],
+  ]},
   { title: 'الفوترة والخزينة', items: [
     ['مستخلصات وفواتير العملاء','/erp/client-invoices',FileText], ['فواتير الموردين','/erp/supplier-invoices',FileText],
     ['مستخلصات مقاولي الباطن','/erp/subcontract-certificates',FileCheck2], ['الخزينة والتحصيل والسداد','/erp/treasury',Landmark],

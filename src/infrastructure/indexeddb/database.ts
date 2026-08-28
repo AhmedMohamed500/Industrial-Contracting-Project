@@ -8,6 +8,7 @@ import type { CashTransaction, ClientInvoice, SubcontractCertificate, SupplierIn
 import type { CashForecast, ProjectCloseoutRecord, SupplierReview } from '../../domain/reporting';
 import type { MaterialIssue, SiteMaterialRequestRecord, StockAdjustment, StockCount, StockReservation, UnitDefinition, WarehouseTransfer } from '../../domain/inventory-operations';
 import type { CommercialNote, ServiceOrderRecord, SupplyLotRecord } from '../../domain/supply-control';
+import type { ClientIPC, ClientIPCLine, HandoverRecord, MaterialsOnSiteRecord, RetentionReleaseRecord, SubcontractRecord } from '../../domain/execution';
 
 export class ErpLocalDatabase extends Dexie {
   companies!: EntityTable<Company, 'id'>;
@@ -62,6 +63,12 @@ export class ErpLocalDatabase extends Dexie {
   supplyLots!: EntityTable<SupplyLotRecord, 'id'>;
   serviceOrders!: EntityTable<ServiceOrderRecord, 'id'>;
   commercialNotes!: EntityTable<CommercialNote, 'id'>;
+  subcontracts!: EntityTable<SubcontractRecord, 'id'>;
+  clientIPCs!: EntityTable<ClientIPC, 'id'>;
+  clientIPCLines!: EntityTable<ClientIPCLine, 'id'>;
+  materialsOnSite!: EntityTable<MaterialsOnSiteRecord, 'id'>;
+  handovers!: EntityTable<HandoverRecord, 'id'>;
+  retentionReleases!: EntityTable<RetentionReleaseRecord, 'id'>;
 
   constructor() {
     super('industrial-contracting-erp');
@@ -153,6 +160,7 @@ export class ErpLocalDatabase extends Dexie {
       stockCounts:'id, companyId, [companyId+number], itemId, warehouseId, date, status',
     });
     this.version(9).stores({supplyLots:'id, companyId, [companyId+number], projectId, contractId, boqItemId, plannedDeliveryDate, status',serviceOrders:'id, companyId, [companyId+number], projectId, supplierId, requiredBy, status',commercialNotes:'id, companyId, [companyId+number], partyType, partyId, sourceType, sourceId, date, status'});
+    this.version(10).stores({subcontracts:'id, companyId, [companyId+number], projectId, subcontractorId, status',clientIPCs:'id, companyId, [companyId+number], projectId, contractId, clientId, date, status',clientIPCLines:'id, companyId, ipcId, boqItemId',materialsOnSite:'id, companyId, [companyId+number], projectId, contractId, boqItemId, status, ipcId',handovers:'id, companyId, [companyId+number], projectId, kind, date, status',retentionReleases:'id, companyId, [companyId+number], partyType, partyId, projectId, sourceType, sourceId, date, status'});
   }
 }
 
