@@ -166,3 +166,7 @@ None are implemented screens, workflows, posting rules, or Dexie tables. Deliver
 ## 23. Commercial and Project Core Implementation
 
 Schema v3 adds company-scoped parties, contracts, BOQ items, project budget lines, cost dimensions, tenders, and variations while retaining v1/v2 stores. Implemented screens expose working CRUD and state actions only. Tender conversion creates its project and contract in one Dexie transaction and returns the same identifiers when repeated. Approved variation revenue is recomputed from source variations and updates contract revised value atomically. Supply, procurement, inventory, client billing, and actual-cost posting remain outside this batch.
+
+## 24. Supply Planning and Procurement Core
+
+Schema v4 adds supply plans, material requirements, purchase requisitions, RFQs, supplier quotes, and purchase orders. PR state transitions are explicit; RFQ requires an approved PR and valid invited suppliers. Quote selection closes the RFQ, marks one quote selected, and creates one idempotent PO in a single transaction. PO approval represents committed cost only. Dispatch, receipt, inventory, inspection, supplier invoicing, payment, and accounting posting are not inferred from PO approval.

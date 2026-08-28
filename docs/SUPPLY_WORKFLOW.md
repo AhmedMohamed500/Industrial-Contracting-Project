@@ -2,7 +2,7 @@
 
 ## الحالة
 
-**Planned architecture only.** لا توجد حاليًا شاشات أو معاملات أو جداول IndexedDB للتوريدات. النماذج في `src/domain/planned-operations.ts` تحدد لغة المجال وحدود المستودعات المستقبلية فقط.
+**Partial:** خطط التوريد واحتياجات المواد وPR/RFQ وعروض الموردين وPO تعمل في IndexedDB schema v4. الشحن والاستلام والتسليم والفحص والقبول والفوترة والتحصيل لم تُنفذ بعد.
 
 ## الهدف
 
@@ -74,7 +74,7 @@ GRN في المخزن الرئيسي، ثم مستند تسليم أو صرف م
 
 لا يحدث ترحيل قبل اكتمال Accounting Core. عند التنفيذ يحدد posting matrix الحدث وفق سياسة الشركة: receipt/GRNI، supplier invoice، return، client invoice/IPC، collection، cost allocation، credit/debit note، reversal. كل قيد متوازن وذري وidempotent وداخل فترة مفتوحة وبحسابات mapping لا constants.
 
-## ضوابط واعتمادات مستقبلية
+## الضوابط
 
 - منع تجاوز الكميات مع tolerances معتمدة.
 - فصل منشئ المستند عن المعتمد حيث يلزم.
@@ -87,4 +87,4 @@ GRN في المخزن الرئيسي، ثم مستند تسليم أو صرف م
 
 ## خارطة التنفيذ
 
-Accounting Core أولًا، ثم Contract/Project Core، ثم Supply Planning/Procurement، ثم Receiving/Inventory/Direct Delivery، ثم Client Billing/Collection/Profitability. لا تضاف جداول Dexie قبل وجود use cases وقواعد انتقال واختبارات وترحيل schema موثق.
+Accounting Core وContract/Project Core وSupply Planning/Procurement منفذة. التالي Receiving/Inventory/Direct Delivery، ثم Client Billing/Collection/Profitability. كل schema تظل additive ومغطاة بقواعد انتقال واختبارات.

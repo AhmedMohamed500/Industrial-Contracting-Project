@@ -13,7 +13,7 @@
 - إعداد الشركة والسنة والفترات الشهرية والتعريفات الأساسية الاختيارية.
 - شركات متعددة مع عزل `companyId` وتبديل الشركة وإضافة الفروع.
 - حفظ مسودة الإعداد ونسخة JSON احتياطية واستعادة متوافقة مع الإصدار.
-- IndexedDB/Dexie schema v3 مع ترقيات additive تحافظ على جداول وبيانات v1/v2.
+- IndexedDB/Dexie schema v4 مع ترقيات additive تحافظ على جداول وبيانات v1/v2.
 - حالات صفرية صادقة؛ لا توجد معاملات أو أرصدة أو مشروعات تجريبية مصطنعة.
 
 ## Theme & Navigation — Implemented
@@ -25,9 +25,9 @@
 
 Industrial Contracting, Supply Only, Supply & Installation, Maintenance, Service Contract متاحة في المشروعات والعقود والمناقصات المحفوظة محليًا. سياسات التسليم والفوترة الخاصة بكل نوع تأتي مع الوحدات التشغيلية التالية.
 
-## Supply Management — Planned
+## Supply Management — Partial / Planning Implemented
 
-تم توثيق معمارية SupplyContract وSupplyBOQItem وSupplySchedule وSupplyLot وSupplyRequirement وSupplyDelivery وSupplyDeliveryLine وSupplyInspection وSupplyReturn وSupplyCostAllocation، مع repository contracts تخطيطية فقط. لا توجد جداول Dexie أو بيانات تشغيلية أو مستندات قابلة للحفظ.
+خطط التوريد المراجعة واحتياجات المواد بمصدر وتاريخ وكمية مرتبطة بالمشروع/العقد/BOQ تعمل محليًا. دفعات التوريد والشحن والتسليم والفحص والقبول والمرتجعات وتخصيص التكلفة تأتي في الدفعات التالية.
 
 ## Accounting Cycle — Implemented Core / Partial Statements
 
@@ -44,9 +44,9 @@ Industrial Contracting, Supply Only, Supply & Installation, Maintenance, Service
 - **Implemented:** مناقصات وتحويل ذري ومتكرر بأمان للمناقصة الفائزة إلى مشروع وعقد؛ BOQ وموازنات ومراكز/أكواد تكلفة وتغييرات تعيد حساب العقد عند الاعتماد.
 - **Planned:** WBS/MOS، mobilization/demobilization، overhead، inter-project/intercompany، actual cost والربحية والإقفال.
 
-## Procurement — Planned
+## Procurement — Implemented Core / Planned Fulfillment
 
-PR → RFQ → عروض → مقارنة → PO → receipt/direct delivery → supplier invoice → payment. لا يوجد تنفيذ أو persistence.
+يعمل PR بحالات draft → submitted → approved، ثم RFQ لموردين مسجلين، وعروض أسعار ومقارنة، واختيار ذري متكرر بأمان ينشئ PO، ثم اعتماد PO. الاستلام/التسليم وفاتورة المورد والدفع لم تُنفذ بعد.
 
 ## Inventory — Partial / Planned
 
@@ -68,11 +68,11 @@ PR → RFQ → عروض → مقارنة → PO → receipt/direct delivery → 
 
 ## Local Data Model — Implemented
 
-Dexie schema version 3 يحتفظ بجداول v1/v2 ويضيف parties وcontracts وboqItems وprojectBudgetLines وcostDimensions وtenders وvariations. الترقية additive، وBackup v3 يشمل الجداول الجديدة ويقبل v1/v2.
+Dexie schema version 4 يحتفظ بجداول v1–v3 ويضيف supplyPlans وmaterialRequirements وpurchaseRequisitions وrfqs وsupplierQuotes وpurchaseOrders. الترقية additive، وBackup v4 يشملها ويقبل الإصدارات الأقدم.
 
 ## Quality Coverage
 
-الاختبارات تغطي الأساس والمحاسبة والنسخ الاحتياطي وعزل الأطراف وBOQ والتحويل الذري للمناقصة وإعادة حساب قيمة العقد من التغييرات المعتمدة.
+الاختبارات تغطي الأساس والمحاسبة والتجاري، وانتقالات PR، وضوابط RFQ والعروض، وإنشاء PO الذري والمتكرر بأمان.
 
 ## Known Limitations
 

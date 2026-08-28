@@ -36,7 +36,7 @@
 
 `React UI → application services → domain/repository interfaces → Dexie/IndexedDB`
 
-لا تصل المكونات إلى Dexie مباشرة. قاعدة IndexedDB الحالية هي schema version 3: ترقيات additive تحتفظ ببيانات v1/v2 وتضيف الأطراف والعقود وBOQ والموازنات والأبعاد والمناقصات والتغييرات. لا توجد جداول توريدات بعد؛ `src/domain/planned-operations.ts` يوثق المجال المستهدف فقط.
+لا تصل المكونات إلى Dexie مباشرة. قاعدة IndexedDB الحالية هي schema version 4: ترقيات additive تحتفظ ببيانات v1/v2 وتضيف الأطراف والعقود وBOQ والموازنات والأبعاد والمناقصات والتغييرات. خطط التوريد والاحتياجات وPR/RFQ/عروض الموردين/PO محفوظة فعليًا؛ الاستلام والمخزون والتسليم لم تُنفذ بعد.
 
 لا يوجد Backend أو قاعدة سحابية أو API مدفوع أو متغيرات بيئة مطلوبة. البيانات تبقى على نفس المتصفح والجهاز وقد تختفي عند مسح بيانات المتصفح. ملف JSON الاحتياطي يحمل `schemaVersion` و`appVersion` و`createdAt` ويجب حفظه خارج المتصفح.
 
@@ -62,7 +62,7 @@ npm run build
 
 1. **Accounting Core — Implemented batch:** COA، mapping، opening/manual journals، posting/reversal، journal/ledger/trial balance/basic statements.
 2. **Contract & Project Core — Implemented batch:** الأطراف، أنواع العقود، المشروعات، العقود، BOQ، الميزانيات، مراكز/أكواد التكلفة، المناقصات والتغييرات.
-3. **Phase 4 — Supply & Procurement Planning:** خطة/دفعات التوريد، المتطلبات، PR/RFQ/PO، التزامات الشراء.
+3. **Supply & Procurement Planning — Implemented batch:** خطط التوريد، الاحتياجات، PR واعتمادها، RFQ، عروض الموردين والمقارنة، واختيار العرض وإنشاء PO واعتماده.
 4. **Phase 5 — Receiving, Inventory & Direct Delivery:** الاستلام، الفحص، المخازن، التسليم المباشر، المرتجعات.
 5. **Phase 6 — Costing & Revenue:** تكلفة التوريد/المشروع، مستخلصات وفواتير العملاء، التحصيل والربحية.
 6. **Phase 7+ — Subcontractors, Treasury, Forecast, Closeout & Reporting:** الموردون ومقاولو الباطن والخزينة والتنبؤ وأداء المورد وإقفال المشروع والقوائم.

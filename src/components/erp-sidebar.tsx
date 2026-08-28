@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { ArchiveRestore, BarChart3, BookOpen, Boxes, Building2, Calculator, CheckCircle2, FileCheck2, FileSpreadsheet, FileText, Handshake, Landmark, ListTree, Settings, ShieldCheck, Tags, TrendingUp, Users, X } from 'lucide-react';
+import { ArchiveRestore, BarChart3, BookOpen, Boxes, Building2, Calculator, CheckCircle2, ClipboardList, FileCheck2, FileSpreadsheet, FileText, Handshake, Landmark, ListTree, Settings, ShieldCheck, ShoppingCart, Tags, TrendingUp, Truck, Users, X } from 'lucide-react';
 
 const groups = [
   { title: 'الإدارة', items: [
@@ -17,6 +17,11 @@ const groups = [
   ]},
   { title: 'الأطراف', items: [
     ['العملاء','/erp/clients',Users], ['الموردون','/erp/suppliers',Users], ['مقاولو الباطن','/erp/subcontractors',Users],
+  ]},
+  { title: 'التوريد والمشتريات', items: [
+    ['خطط التوريد','/erp/supply-plans',Truck], ['احتياجات المواد','/erp/material-requirements',Boxes],
+    ['طلبات الشراء PR','/erp/purchase-requisitions',ClipboardList], ['طلبات عروض الأسعار RFQ','/erp/rfqs',FileSpreadsheet],
+    ['مقارنة عروض الموردين','/erp/supplier-quotes',Calculator], ['أوامر الشراء PO','/erp/purchase-orders',ShoppingCart],
   ]},
   { title: 'المالية', items: [
     ['دليل الحسابات','/erp/accounts',ListTree], ['الربط المحاسبي','/erp/mapping',FileCheck2],

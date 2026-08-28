@@ -2,6 +2,7 @@ import Dexie, { type EntityTable } from 'dexie';
 import type { AccountingPeriod, AppSetting, AuditEvent, Branch, Company, FiscalYear, LocalProfile, SetupDraft, TaxDefinition, TreasuryAccount, Warehouse } from '../../domain/foundation';
 import type { Account, AccountingMapping, JournalEntry, JournalLine } from '../../domain/accounting';
 import type { BOQItem, BusinessParty, Contract, CostDimension, ProjectBudgetLine, ProjectRecord, Tender, Variation } from '../../domain/commercial';
+import type { MaterialRequirement, PurchaseOrder, PurchaseRequisition, RequestForQuotation, SupplierQuote, SupplyPlan } from '../../domain/procurement';
 
 export class ErpLocalDatabase extends Dexie {
   companies!: EntityTable<Company, 'id'>;
@@ -27,6 +28,12 @@ export class ErpLocalDatabase extends Dexie {
   costDimensions!: EntityTable<CostDimension, 'id'>;
   tenders!: EntityTable<Tender, 'id'>;
   variations!: EntityTable<Variation, 'id'>;
+  supplyPlans!: EntityTable<SupplyPlan, 'id'>;
+  materialRequirements!: EntityTable<MaterialRequirement, 'id'>;
+  purchaseRequisitions!: EntityTable<PurchaseRequisition, 'id'>;
+  rfqs!: EntityTable<RequestForQuotation, 'id'>;
+  supplierQuotes!: EntityTable<SupplierQuote, 'id'>;
+  purchaseOrders!: EntityTable<PurchaseOrder, 'id'>;
 
   constructor() {
     super('industrial-contracting-erp');
@@ -86,6 +93,15 @@ export class ErpLocalDatabase extends Dexie {
       costDimensions: 'id, companyId, [companyId+kind+code], kind, parentId, status',
       tenders: 'id, companyId, [companyId+number], clientId, status',
       variations: 'id, companyId, [companyId+contractId+number], projectId, contractId, status',
+    });
+    this.version(4).stores({
+      companies: 'id, &code, status, createdAt', branches: 'id, companyId, [companyId+code], status', fiscalYears: 'id, companyId, [companyId+startDate], status', accountingPeriods: 'id, companyId, fiscalYearId, [companyId+startDate], status', taxes: 'id, companyId, kind, status', treasuryAccounts: 'id, companyId, type, status', warehouses: 'id, companyId, [companyId+code], type, status', projects: 'id, companyId, [companyId+code], clientId, contractType, lifecycleStatus, status', localProfiles: 'id, displayName', setupDrafts: 'id, updatedAt', appSettings: 'key', auditEvents: 'id, companyId, entityType, entityId, createdAt', accounts: 'id, companyId, [companyId+code], parentId, category, status, isPosting', accountingMappings: 'id, companyId, [companyId+key], accountId', journalEntries: 'id, companyId, [companyId+number], date, periodId, status, sourceType, sourceId', journalLines: 'id, companyId, journalEntryId, accountId, projectId, costCenterId, costCodeId', parties: 'id, companyId, [companyId+type+code], type, status, arabicName', contracts: 'id, companyId, [companyId+number], projectId, clientId, type, status', boqItems: 'id, companyId, [companyId+projectId+code], projectId, contractId, parentId, status', projectBudgetLines: 'id, companyId, projectId, boqItemId, category, versionType, status', costDimensions: 'id, companyId, [companyId+kind+code], kind, parentId, status', tenders: 'id, companyId, [companyId+number], clientId, status', variations: 'id, companyId, [companyId+contractId+number], projectId, contractId, status',
+      supplyPlans: 'id, companyId, [companyId+number+revision], projectId, contractId, status, createdAt',
+      materialRequirements: 'id, companyId, [companyId+code], supplyPlanId, projectId, boqItemId, status, requiredBy',
+      purchaseRequisitions: 'id, companyId, [companyId+number], projectId, requirementId, status, createdAt',
+      rfqs: 'id, companyId, [companyId+number], requisitionId, status, createdAt',
+      supplierQuotes: 'id, companyId, [companyId+rfqId+supplierId], rfqId, supplierId, selected, createdAt',
+      purchaseOrders: 'id, companyId, [companyId+number], projectId, requisitionId, quoteId, supplierId, status, createdAt',
     });
   }
 }

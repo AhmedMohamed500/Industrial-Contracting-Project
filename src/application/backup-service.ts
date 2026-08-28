@@ -1,7 +1,7 @@
 import { APP_VERSION, SCHEMA_VERSION, type BackupEnvelope } from '../domain/foundation';
 import { getDatabase } from '../infrastructure/indexeddb/database';
 
-const TABLES = ['companies', 'branches', 'fiscalYears', 'accountingPeriods', 'taxes', 'treasuryAccounts', 'warehouses', 'projects', 'localProfiles', 'appSettings', 'auditEvents', 'accounts', 'accountingMappings', 'journalEntries', 'journalLines', 'parties', 'contracts', 'boqItems', 'projectBudgetLines', 'costDimensions', 'tenders', 'variations'] as const;
+const TABLES = ['companies', 'branches', 'fiscalYears', 'accountingPeriods', 'taxes', 'treasuryAccounts', 'warehouses', 'projects', 'localProfiles', 'appSettings', 'auditEvents', 'accounts', 'accountingMappings', 'journalEntries', 'journalLines', 'parties', 'contracts', 'boqItems', 'projectBudgetLines', 'costDimensions', 'tenders', 'variations', 'supplyPlans', 'materialRequirements', 'purchaseRequisitions', 'rfqs', 'supplierQuotes', 'purchaseOrders'] as const;
 
 export function assertCompatibleBackup(value: unknown): asserts value is BackupEnvelope {
   if (!value || typeof value !== 'object') throw new Error('ملف النسخة الاحتياطية غير صالح');
