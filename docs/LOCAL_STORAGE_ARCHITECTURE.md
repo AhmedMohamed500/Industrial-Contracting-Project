@@ -2,9 +2,9 @@
 
 ## Implemented
 
-IndexedDB is the source of truth; localStorage is not used for transactional data. Dexie schema version 8 is lazy-opened in the browser. React depends on repository contracts rather than tables.
+IndexedDB is the source of truth; localStorage is not used for transactional data. Dexie schema version 9 is lazy-opened in the browser. React depends on repository contracts rather than tables.
 
-Current tables retain v1–v7 and add unit, site request, reservation, transfer, issue, adjustment, and count stores. Earlier tables remain intact. Company-owned records contain `companyId`, UUIDs, timestamps, and human codes. First-run creation is atomic. Drafts survive refresh. Backup v8 includes all current tables; legacy backups remain restorable with newer tables empty.
+Current tables retain v1–v8 and add supply lot, service order, and commercial note stores. Earlier tables remain intact. Company-owned records contain `companyId`, UUIDs, timestamps, and human codes. First-run creation is atomic. Drafts survive refresh. Backup v9 includes all current tables; legacy backups remain restorable with newer tables empty.
 
 ## Planned types are not persisted
 

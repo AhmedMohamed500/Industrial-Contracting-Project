@@ -186,3 +186,7 @@ Schema v7 adds cash forecasts, supplier reviews, and project closeouts. Project 
 ## 28. Advanced Inventory Operations
 
 Schema v8 adds units, site material requests, reservations, transfers, project issues, adjustments, counts, and waste. Reservations use free stock, transfers create equal source/destination movements without cost, and issues/adjustments atomically create stock movement, balanced GL journal, and posted source state. Counts preserve system/count/variance evidence. Serial/batch and automatic weighted-average issue pricing remain explicit follow-up controls.
+
+## 29. Supply Control and Commercial Matching
+
+Schema v9 adds supply lots, service orders, and commercial notes. Quantity control derives all stages from BOQ, requirements, PO, GRN, delivery, inspection, invoice, and return sources. Three-way match exposes quantity and value variances. Notes post balanced AR/AP offset journals. Service orders add committed service value without fabricating receipt or payment.

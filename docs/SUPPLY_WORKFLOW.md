@@ -2,7 +2,7 @@
 
 ## الحالة
 
-**Partial:** خطط التوريد واحتياجات المواد وPR/RFQ وعروض الموردين وPO تعمل في IndexedDB schema v4. الشحن والاستلام والتسليم والفحص والقبول والفوترة والتحصيل لم تُنفذ بعد.
+**Implemented operational core:** plans, lots, requirements, PR/RFQ/quotes/PO, quantity stages, receipt/direct delivery, inspection/acceptance/rejection, returns, invoicing, collection, 3-way match, service orders, and commercial notes work from IndexedDB source documents.
 
 ## الهدف
 

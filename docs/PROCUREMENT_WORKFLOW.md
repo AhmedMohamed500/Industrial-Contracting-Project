@@ -2,7 +2,7 @@
 
 ## الحالة
 
-**Implemented core:** Supply Plan/Requirement → PR → approval → RFQ → supplier quotations/comparison → selected quote → draft/approved PO. Receipt, supplier invoice, payment, return, and accounting posting remain planned.
+**Implemented cycle:** Supply Plan/Requirement → PR → approval → RFQ → supplier quotations/comparison → selected quote → PO → receipt → supplier invoice → payment/return, with PO/GRN/invoice variance reporting and GL source posting.
 
 The implemented local flow preserves requirement, PR, RFQ, quote, and PO references. A PR must be approved before RFQ. Only invited suppliers can quote. Selecting a quote closes its RFQ and creates one idempotent PO in a Dexie transaction. The remaining dispatch/receipt/inspection/invoice/payment flow is planned.
 

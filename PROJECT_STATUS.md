@@ -13,7 +13,7 @@
 - إعداد الشركة والسنة والفترات الشهرية والتعريفات الأساسية الاختيارية.
 - شركات متعددة مع عزل `companyId` وتبديل الشركة وإضافة الفروع.
 - حفظ مسودة الإعداد ونسخة JSON احتياطية واستعادة متوافقة مع الإصدار.
-- IndexedDB/Dexie schema v8 مع ترقيات additive تحافظ على كل الإصدارات السابقة.
+- IndexedDB/Dexie schema v9 مع ترقيات additive تحافظ على كل الإصدارات السابقة.
 - حالات صفرية صادقة؛ لا توجد معاملات أو أرصدة أو مشروعات تجريبية مصطنعة.
 
 ## Theme & Navigation — Implemented
@@ -25,9 +25,9 @@
 
 Industrial Contracting, Supply Only, Supply & Installation, Maintenance, Service Contract متاحة في المشروعات والعقود والمناقصات المحفوظة محليًا. سياسات التسليم والفوترة الخاصة بكل نوع تأتي مع الوحدات التشغيلية التالية.
 
-## Supply Management — Partial / Planning Implemented
+## Supply Management — Implemented Operational Core
 
-خطط التوريد المراجعة واحتياجات المواد بمصدر وتاريخ وكمية مرتبطة بالمشروع/العقد/BOQ تعمل محليًا. دفعات التوريد والشحن والتسليم والفحص والقبول والمرتجعات وتخصيص التكلفة تأتي في الدفعات التالية.
+خطط ودفعات التوريد والاحتياجات وتتبع مراحل الكمية تعمل من BOQ والمشتريات والاستلام والتسليم والفحص والفواتير والمرتجعات الفعلية، مع التسليم المباشر والمطابقة الثلاثية.
 
 ## Accounting Cycle — Implemented Core / Partial Statements
 
@@ -69,7 +69,7 @@ Industrial Contracting, Supply Only, Supply & Installation, Maintenance, Service
 
 ## Local Data Model — Implemented
 
-Dexie schema version 8 يحتفظ بجداول v1–v7 ويضيف units وsiteMaterialRequests وstockReservations وwarehouseTransfers وmaterialIssues وstockAdjustments وstockCounts. Backup v8 يشمل كل الجداول.
+Dexie schema version 9 يحتفظ بجداول v1–v8 ويضيف supplyLots وserviceOrders وcommercialNotes. Backup v9 يشمل كل الجداول.
 
 ## Quality Coverage
 

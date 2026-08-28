@@ -19,9 +19,9 @@ const groups = [
     ['العملاء','/erp/clients',Users], ['الموردون','/erp/suppliers',Users], ['مقاولو الباطن','/erp/subcontractors',Users],
   ]},
   { title: 'التوريد والمشتريات', items: [
-    ['خطط التوريد','/erp/supply-plans',Truck], ['احتياجات المواد','/erp/material-requirements',Boxes],
+    ['مراقبة التوريدات','/erp/supply-control',TrendingUp], ['خطط التوريد','/erp/supply-plans',Truck], ['دفعات التوريد','/erp/supply-lots',Boxes], ['تتبع الكميات','/erp/quantity-tracking',BarChart3], ['احتياجات المواد','/erp/material-requirements',Boxes],
     ['طلبات الشراء PR','/erp/purchase-requisitions',ClipboardList], ['طلبات عروض الأسعار RFQ','/erp/rfqs',FileSpreadsheet],
-    ['مقارنة عروض الموردين','/erp/supplier-quotes',Calculator], ['أوامر الشراء PO','/erp/purchase-orders',ShoppingCart],
+    ['مقارنة عروض الموردين','/erp/supplier-quotes',Calculator], ['أوامر الشراء PO','/erp/purchase-orders',ShoppingCart], ['المطابقة الثلاثية','/erp/three-way-match',FileCheck2], ['أوامر الخدمات','/erp/service-orders',Handshake], ['إشعارات الخصم والإضافة','/erp/commercial-notes',FileText],
   ]},
   { title: 'المخزون والتسليم', items: [
     ['الأصناف','/erp/items',Tags], ['الوحدات','/erp/units',Calculator], ['استلامات الموردين','/erp/goods-receipts',ArchiveRestore],

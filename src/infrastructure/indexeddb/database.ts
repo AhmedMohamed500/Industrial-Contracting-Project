@@ -7,6 +7,7 @@ import type { ClientDelivery, DeliveryInspection, GoodsReceipt, InventoryItem, P
 import type { CashTransaction, ClientInvoice, SubcontractCertificate, SupplierInvoice } from '../../domain/finance';
 import type { CashForecast, ProjectCloseoutRecord, SupplierReview } from '../../domain/reporting';
 import type { MaterialIssue, SiteMaterialRequestRecord, StockAdjustment, StockCount, StockReservation, UnitDefinition, WarehouseTransfer } from '../../domain/inventory-operations';
+import type { CommercialNote, ServiceOrderRecord, SupplyLotRecord } from '../../domain/supply-control';
 
 export class ErpLocalDatabase extends Dexie {
   companies!: EntityTable<Company, 'id'>;
@@ -58,6 +59,9 @@ export class ErpLocalDatabase extends Dexie {
   materialIssues!: EntityTable<MaterialIssue, 'id'>;
   stockAdjustments!: EntityTable<StockAdjustment, 'id'>;
   stockCounts!: EntityTable<StockCount, 'id'>;
+  supplyLots!: EntityTable<SupplyLotRecord, 'id'>;
+  serviceOrders!: EntityTable<ServiceOrderRecord, 'id'>;
+  commercialNotes!: EntityTable<CommercialNote, 'id'>;
 
   constructor() {
     super('industrial-contracting-erp');
@@ -148,6 +152,7 @@ export class ErpLocalDatabase extends Dexie {
       stockAdjustments:'id, companyId, [companyId+number], itemId, warehouseId, projectId, date, kind, status',
       stockCounts:'id, companyId, [companyId+number], itemId, warehouseId, date, status',
     });
+    this.version(9).stores({supplyLots:'id, companyId, [companyId+number], projectId, contractId, boqItemId, plannedDeliveryDate, status',serviceOrders:'id, companyId, [companyId+number], projectId, supplierId, requiredBy, status',commercialNotes:'id, companyId, [companyId+number], partyType, partyId, sourceType, sourceId, date, status'});
   }
 }
 

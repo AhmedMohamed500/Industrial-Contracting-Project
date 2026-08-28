@@ -6,6 +6,7 @@ import { InventoryApp, type InventoryModule } from '../../../src/components/inve
 import { FinanceApp, type FinanceModule } from '../../../src/components/finance/finance-app';
 import { ReportingApp, type ReportingModule } from '../../../src/components/reporting/reporting-app';
 import { InventoryOperationsApp, type InventoryOperationsModule } from '../../../src/components/inventory/inventory-operations-app';
+import { SupplyControlApp, type SupplyControlModule } from '../../../src/components/supply/supply-control-app';
 
 const modules: AccountingModule[] = ['accounts','mapping','opening-balances','journals','general-journal','ledger','trial-balance','financial-statements'];
 const commercialModules: CommercialModule[] = ['clients','suppliers','subcontractors','projects','contracts','boq','budgets','cost-centers','cost-codes','tenders','variations'];
@@ -14,6 +15,7 @@ const inventoryModules: InventoryModule[] = ['items','goods-receipts','stock-led
 const financeModules: FinanceModule[] = ['client-invoices','supplier-invoices','subcontract-certificates','treasury'];
 const reportingModules: ReportingModule[] = ['project-performance','cash-forecast','supplier-performance','period-close','project-closeout'];
 const inventoryOperationsModules: InventoryOperationsModule[] = ['units','site-requests','reservations','warehouse-transfers','material-issues','stock-adjustments','stock-counts','waste'];
+const supplyControlModules: SupplyControlModule[] = ['supply-control','supply-lots','quantity-tracking','three-way-match','service-orders','commercial-notes'];
 
 export default async function AccountingModulePage({params}:{params:Promise<{module:string}>}) {
   const { module } = await params;
@@ -24,5 +26,6 @@ export default async function AccountingModulePage({params}:{params:Promise<{mod
   if (financeModules.includes(module as FinanceModule)) return <FinanceApp module={module as FinanceModule}/>;
   if (reportingModules.includes(module as ReportingModule)) return <ReportingApp module={module as ReportingModule}/>;
   if (inventoryOperationsModules.includes(module as InventoryOperationsModule)) return <InventoryOperationsApp module={module as InventoryOperationsModule}/>;
+  if (supplyControlModules.includes(module as SupplyControlModule)) return <SupplyControlApp module={module as SupplyControlModule}/>;
   notFound();
 }
