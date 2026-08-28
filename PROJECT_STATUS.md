@@ -13,7 +13,7 @@
 - إعداد الشركة والسنة والفترات الشهرية والتعريفات الأساسية الاختيارية.
 - شركات متعددة مع عزل `companyId` وتبديل الشركة وإضافة الفروع.
 - حفظ مسودة الإعداد ونسخة JSON احتياطية واستعادة متوافقة مع الإصدار.
-- IndexedDB/Dexie schema v7 مع ترقيات additive تحافظ على جداول وبيانات v1/v2.
+- IndexedDB/Dexie schema v8 مع ترقيات additive تحافظ على كل الإصدارات السابقة.
 - حالات صفرية صادقة؛ لا توجد معاملات أو أرصدة أو مشروعات تجريبية مصطنعة.
 
 ## Theme & Navigation — Implemented
@@ -48,10 +48,11 @@ Industrial Contracting, Supply Only, Supply & Installation, Maintenance, Service
 
 يعمل PR بحالات draft → submitted → approved، ثم RFQ لموردين مسجلين، وعروض أسعار ومقارنة، واختيار ذري متكرر بأمان ينشئ PO، ثم اعتماد PO. الاستلام/التسليم وفاتورة المورد والدفع لم تُنفذ بعد.
 
-## Inventory — Implemented Core
+## Inventory — Implemented Operational Core
 
 - **Implemented:** item master، استلامات مرتبطة بـPO معتمد، ترحيل للمخزن، stock ledger ورصيد مشتق، تسليم العميل، direct delivery بلا حركات مخزن وهمية، فحص وقبول ومرتجعات مورد.
-- **Planned:** weighted-average valuation، reservations، transfers، adjustments، serial/batch والتكامل المحاسبي.
+- **Implemented:** وحدات وتحويل، طلبات مواقع، حجز وفق free stock، تحويلات متوازنة، صرف مشروع بقيد تكلفة، تسويات وجرد وهالك بقيود.
+- **Planned:** serial/batch، automated weighted-average issue pricing، وinventory-to-GL reconciliation report.
 
 ## Client, Supplier & Subcontractors — Implemented Masters / Planned Transactions
 
@@ -68,7 +69,7 @@ Industrial Contracting, Supply Only, Supply & Installation, Maintenance, Service
 
 ## Local Data Model — Implemented
 
-Dexie schema version 7 يحتفظ بجداول v1–v6 ويضيف cashForecasts وsupplierReviews وprojectCloseouts. Backup v7 يشمل كل الجداول ويقبل الإصدارات الأقدم.
+Dexie schema version 8 يحتفظ بجداول v1–v7 ويضيف units وsiteMaterialRequests وstockReservations وwarehouseTransfers وmaterialIssues وstockAdjustments وstockCounts. Backup v8 يشمل كل الجداول.
 
 ## Quality Coverage
 

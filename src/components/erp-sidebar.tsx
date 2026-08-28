@@ -24,8 +24,11 @@ const groups = [
     ['مقارنة عروض الموردين','/erp/supplier-quotes',Calculator], ['أوامر الشراء PO','/erp/purchase-orders',ShoppingCart],
   ]},
   { title: 'المخزون والتسليم', items: [
-    ['الأصناف','/erp/items',Tags], ['استلامات الموردين','/erp/goods-receipts',ArchiveRestore],
+    ['الأصناف','/erp/items',Tags], ['الوحدات','/erp/units',Calculator], ['استلامات الموردين','/erp/goods-receipts',ArchiveRestore],
     ['سجل المخزون','/erp/stock-ledger',BookOpen], ['تسليمات العميل','/erp/client-deliveries',Truck],
+    ['طلبات خامات المواقع','/erp/site-requests',ClipboardList], ['حجز الخامات','/erp/reservations',Boxes],
+    ['تحويلات المخازن','/erp/warehouse-transfers',Truck], ['صرف للمشروعات','/erp/material-issues',ArchiveRestore],
+    ['التسويات','/erp/stock-adjustments',Calculator], ['الجرد','/erp/stock-counts',FileSpreadsheet], ['الهالك','/erp/waste',X],
     ['الفحص والقبول','/erp/delivery-inspections',FileCheck2], ['مرتجعات المورد','/erp/purchase-returns',ArchiveRestore],
   ]},
   { title: 'الفوترة والخزينة', items: [

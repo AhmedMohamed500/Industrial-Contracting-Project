@@ -6,6 +6,7 @@ import type { MaterialRequirement, PurchaseOrder, PurchaseRequisition, RequestFo
 import type { ClientDelivery, DeliveryInspection, GoodsReceipt, InventoryItem, PurchaseReturnRecord, StockMovement } from '../../domain/inventory';
 import type { CashTransaction, ClientInvoice, SubcontractCertificate, SupplierInvoice } from '../../domain/finance';
 import type { CashForecast, ProjectCloseoutRecord, SupplierReview } from '../../domain/reporting';
+import type { MaterialIssue, SiteMaterialRequestRecord, StockAdjustment, StockCount, StockReservation, UnitDefinition, WarehouseTransfer } from '../../domain/inventory-operations';
 
 export class ErpLocalDatabase extends Dexie {
   companies!: EntityTable<Company, 'id'>;
@@ -50,6 +51,13 @@ export class ErpLocalDatabase extends Dexie {
   cashForecasts!: EntityTable<CashForecast, 'id'>;
   supplierReviews!: EntityTable<SupplierReview, 'id'>;
   projectCloseouts!: EntityTable<ProjectCloseoutRecord, 'id'>;
+  units!: EntityTable<UnitDefinition, 'id'>;
+  siteMaterialRequests!: EntityTable<SiteMaterialRequestRecord, 'id'>;
+  stockReservations!: EntityTable<StockReservation, 'id'>;
+  warehouseTransfers!: EntityTable<WarehouseTransfer, 'id'>;
+  materialIssues!: EntityTable<MaterialIssue, 'id'>;
+  stockAdjustments!: EntityTable<StockAdjustment, 'id'>;
+  stockCounts!: EntityTable<StockCount, 'id'>;
 
   constructor() {
     super('industrial-contracting-erp');
@@ -130,6 +138,15 @@ export class ErpLocalDatabase extends Dexie {
     this.version(7).stores({
       companies: 'id, &code, status, createdAt', branches: 'id, companyId, [companyId+code], status', fiscalYears: 'id, companyId, [companyId+startDate], status', accountingPeriods: 'id, companyId, fiscalYearId, [companyId+startDate], status', taxes: 'id, companyId, kind, status', treasuryAccounts: 'id, companyId, type, status', warehouses: 'id, companyId, [companyId+code], type, status', projects: 'id, companyId, [companyId+code], clientId, contractType, lifecycleStatus, status', localProfiles: 'id, displayName', setupDrafts: 'id, updatedAt', appSettings: 'key', auditEvents: 'id, companyId, entityType, entityId, createdAt', accounts: 'id, companyId, [companyId+code], parentId, category, status, isPosting', accountingMappings: 'id, companyId, [companyId+key], accountId', journalEntries: 'id, companyId, [companyId+number], date, periodId, status, sourceType, sourceId', journalLines: 'id, companyId, journalEntryId, accountId, projectId, costCenterId, costCodeId', parties: 'id, companyId, [companyId+type+code], type, status, arabicName', contracts: 'id, companyId, [companyId+number], projectId, clientId, type, status', boqItems: 'id, companyId, [companyId+projectId+code], projectId, contractId, parentId, status', projectBudgetLines: 'id, companyId, projectId, boqItemId, category, versionType, status', costDimensions: 'id, companyId, [companyId+kind+code], kind, parentId, status', tenders: 'id, companyId, [companyId+number], clientId, status', variations: 'id, companyId, [companyId+contractId+number], projectId, contractId, status', supplyPlans: 'id, companyId, [companyId+number+revision], projectId, contractId, status, createdAt', materialRequirements: 'id, companyId, [companyId+code], supplyPlanId, projectId, boqItemId, status, requiredBy', purchaseRequisitions: 'id, companyId, [companyId+number], projectId, requirementId, status, createdAt', rfqs: 'id, companyId, [companyId+number], requisitionId, status, createdAt', supplierQuotes: 'id, companyId, [companyId+rfqId+supplierId], rfqId, supplierId, selected, createdAt', purchaseOrders: 'id, companyId, [companyId+number], projectId, requisitionId, quoteId, supplierId, status, createdAt', inventoryItems: 'id, companyId, [companyId+code], status, name', goodsReceipts: 'id, companyId, [companyId+number], purchaseOrderId, projectId, supplierId, itemId, warehouseId, scenario, status, createdAt', stockMovements: 'id, companyId, [companyId+itemId+warehouseId], itemId, warehouseId, projectId, sourceType, sourceId, date', clientDeliveries: 'id, companyId, [companyId+number], receiptId, projectId, itemId, warehouseId, scenario, status, createdAt', deliveryInspections: 'id, companyId, [companyId+number], deliveryId, result, status, createdAt', purchaseReturns: 'id, companyId, [companyId+number], receiptId, itemId, warehouseId, status, createdAt', clientInvoices: 'id, companyId, [companyId+number], projectId, contractId, clientId, date, status', supplierInvoices: 'id, companyId, [companyId+supplierId+number], purchaseOrderId, supplierId, projectId, date, status', subcontractCertificates: 'id, companyId, [companyId+subcontractorId+number], projectId, subcontractorId, date, status', cashTransactions: 'id, companyId, [companyId+number], direction, partyType, partyId, sourceType, sourceId, date, status',
       cashForecasts: 'id, companyId, projectId, date, direction, status', supplierReviews: 'id, companyId, supplierId, periodStart, periodEnd', projectCloseouts: 'id, companyId, projectId, status',
+    });
+    this.version(8).stores({
+      units:'id, companyId, [companyId+code], baseUnitId, status',
+      siteMaterialRequests:'id, companyId, [companyId+number], projectId, itemId, warehouseId, status, requiredBy',
+      stockReservations:'id, companyId, requestId, [itemId+warehouseId], projectId, status',
+      warehouseTransfers:'id, companyId, [companyId+number], itemId, fromWarehouseId, toWarehouseId, projectId, date, status',
+      materialIssues:'id, companyId, [companyId+number], requestId, projectId, itemId, warehouseId, date, status',
+      stockAdjustments:'id, companyId, [companyId+number], itemId, warehouseId, projectId, date, kind, status',
+      stockCounts:'id, companyId, [companyId+number], itemId, warehouseId, date, status',
     });
   }
 }

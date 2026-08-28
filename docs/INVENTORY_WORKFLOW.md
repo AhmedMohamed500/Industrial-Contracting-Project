@@ -2,7 +2,7 @@
 
 ## الحالة
 
-**Implemented core:** item master, receipt from approved PO, posted stock movement, stock ledger/on-hand, client delivery, direct delivery without fake stock movement, inspection, and supplier return. Reservations, transfers, adjustments, advanced valuation, and accounting posting remain planned.
+**Implemented operational core:** item/unit masters, unit conversion, receipt, immutable ledger/on-hand, site requests, free-stock reservations, two-sided warehouse transfers, project issues with GL cost posting, direct delivery, inspection, supplier return, counts, adjustments, and waste posting. Serial/batch and automated weighted-average issue pricing remain planned.
 
 Purchase receipt increases controlled stock when goods physically enter a company warehouse. Transfer changes location only and is not consumption. Material issue creates project material consumption/cost; return reverses against its source. Count and adjustment require reason, approval, valuation, and audit.
 

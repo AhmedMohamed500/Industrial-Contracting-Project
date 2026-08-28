@@ -182,3 +182,7 @@ Schema v6 adds client invoices, supplier invoices, subcontract certificates, and
 ## 27. Reporting, Forecast, and Closing Core
 
 Schema v7 adds cash forecasts, supplier reviews, and project closeouts. Project performance is derived from persisted contracts, invoices, collections, POs, supplier invoices, and subcontract certificates rather than editable KPI caches. Period close rejects pending journals. Final project close requires handover, final account, retention/guarantee release, and zero open items. Formal year-end closing entries and bank reconciliation remain documented limitations.
+
+## 28. Advanced Inventory Operations
+
+Schema v8 adds units, site material requests, reservations, transfers, project issues, adjustments, counts, and waste. Reservations use free stock, transfers create equal source/destination movements without cost, and issues/adjustments atomically create stock movement, balanced GL journal, and posted source state. Counts preserve system/count/variance evidence. Serial/batch and automatic weighted-average issue pricing remain explicit follow-up controls.
